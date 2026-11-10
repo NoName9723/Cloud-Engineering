@@ -20,6 +20,7 @@ Campagne pédagogique en six incidents liés au même service :
 3. Corriger une configuration Terraform de stockage (chiffrement, versioning, rétention).
 4. Réparer un workflow GitHub Actions (tests avant déploiement).
 5. Remettre en état l'Horizontal Pod Autoscaler (cible, bornes et seuil CPU).
+6. Réécrire une fonction JavaScript de readiness pour qu'elle retourne un état HTTP cohérent avec ses dépendances.
 
 Le joueur dispose d'un éditeur de code, d'un terminal de commandes simulées, d'une suite de 24 tests de code et de configuration, d'un journal d'événements et d'un déploiement verrouillé tant que tous les tests ne passent pas. La progression est sauvegardée localement dans le navigateur.
 
@@ -31,7 +32,8 @@ HTML5, CSS3, JavaScript natif et illustrations vectorielles SVG. Aucun framework
 ## Tests automatisés
 GitHub Actions exécute automatiquement :
 - `node --check script.js` pour vérifier la syntaxe JavaScript ;
-- `node tests/site-check.mjs` pour contrôler la présence des pages, les liens internes, les ancres, les ressources locales et la structure attendue du Cloud Lab ;\n- `node tests/cloud-lab.test.mjs` pour vérifier que les six configurations de départ échouent comme prévu et que les réparations de référence passent les 24 contrôles.
+- `node tests/site-check.mjs` pour contrôler la présence des pages, les liens internes, les ressources locales et la structure attendue du Cloud Lab ;
+- `node tests/cloud-lab.test.mjs` pour vérifier que les six configurations de départ échouent comme prévu et que les réparations de référence passent les 24 contrôles.
 
 Le workflow se déclenche à chaque push et pull request vers `main`.
 
