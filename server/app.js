@@ -34,8 +34,9 @@ const PRIVATE_ROOT_FILES = new Set([
 function protectInternalFiles(req, res, next) {
   let requestedPath;
   try {
+    const decodedPath = decodeURIComponent(req.path);
     requestedPath = path.posix.normalize(
-      '/' + decodeURIComponent(req.path).replace(/^\\/+/, '')
+      decodedPath.startsWith('/') ? decodedPath : '/' + decodedPath
     );
   } catch {
     return res.status(400).end();
