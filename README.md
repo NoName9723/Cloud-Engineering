@@ -26,13 +26,19 @@ Le joueur dispose d'un éditeur de code, d'un terminal de commandes simulées, d
 
 **Sécurité et limites :** le terminal n'exécute aucune commande système. Le code écrit dans l'éditeur n'est pas exécuté comme JavaScript et n'est envoyé à aucun serveur. Les validateurs vérifient des règles pédagogiques déterministes sur le texte des fichiers. La simulation ne provisionne aucune ressource cloud réelle et les résultats sont fictifs.
 
+## Qualité du site
+- Navigation utilisable au clavier, lien d'accès direct au contenu et indicateurs de focus visibles.
+- Prise en compte de la préférence système de réduction des animations.
+- Métadonnées SEO et Open Graph par page, URL canoniques, favicon, image de partage, sitemap et robots.txt.
+- Page 404 exclue de l'indexation.
+
 ## Technologies
 HTML5, CSS3, JavaScript natif et illustrations vectorielles SVG. Aucun framework ni étape de compilation n'est requis. Les illustrations réseau et exploitation cloud sont des schémas conceptuels créés pour ce site ; les adresses IP sont des exemples.
 
 ## Tests automatisés
 GitHub Actions exécute automatiquement :
 - `node --check script.js` pour vérifier la syntaxe JavaScript ;
-- `node tests/site-check.mjs` pour contrôler la présence des pages, les liens internes, les ressources locales et la structure attendue du Cloud Lab ;
+- `node tests/site-check.mjs` pour contrôler les pages, les liens internes, les ressources locales, les métadonnées SEO et les principaux critères d'accessibilité ;
 - `node tests/cloud-lab.test.mjs` pour vérifier que les six incidents de départ échouent comme prévu et que les réparations de référence passent les 24 contrôles.
 
 Le workflow se déclenche à chaque push et pull request vers `main`.
