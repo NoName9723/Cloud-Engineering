@@ -33,7 +33,7 @@ HTML5, CSS3, JavaScript natif et illustrations vectorielles SVG. Aucun framework
 GitHub Actions exécute automatiquement :
 - `node --check script.js` pour vérifier la syntaxe JavaScript ;
 - `node tests/site-check.mjs` pour contrôler la présence des pages, les liens internes, les ressources locales et la structure attendue du Cloud Lab ;
-- `node tests/cloud-lab.test.mjs` pour vérifier que les six configurations de départ échouent comme prévu et que les réparations de référence passent les 24 contrôles.
+- `node tests/cloud-lab.test.mjs` pour vérifier que les six incidents de départ échouent comme prévu et que les réparations de référence passent les 24 contrôles.
 
 Le workflow se déclenche à chaque push et pull request vers `main`.
 
