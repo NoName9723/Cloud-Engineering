@@ -15,6 +15,8 @@ const requiredPages = [
   '404.html'
 ];
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
+const requiredSupportFiles = ['robots.txt', 'sitemap.xml', 'assets/favicon.svg', 'assets/og-cloud.svg'];
+for (const file of requiredSupportFiles) assert.ok(fs.existsSync(path.join(root, file)), `Missing support file: ${file}`);
 
 for (const page of requiredPages) {
   assert.ok(fs.existsSync(path.join(root, page)), `Missing page: ${page}`);
@@ -62,7 +64,7 @@ const script = read('script.js');
 for (const configPath of ['k8s/deployment.yaml','nginx/nginx.conf','infra/storage.tf','.github/workflows/deploy.yml','k8s/hpa.yaml','src/healthcheck.js']) {
   assert.ok(script.includes(configPath), `Cloud Lab scenario missing config file: ${configPath}`);
 }
-for (const missionId of ['deployment','routing','storage','pipeline','scaling']) {
+for (const missionId of ['deployment','routing','storage','pipeline','scaling','api-health']) {
   assert.ok(script.includes(`id:'${missionId}'`), `Cloud Lab mission missing: ${missionId}`);
 }
 assert.equal((script.match(/\{name:/g) || []).length, 24, 'The campaign must expose 24 automated code/configuration checks');
@@ -71,4 +73,4 @@ assert.match(script, /localStorage/);
 assert.doesNotMatch(script, /\beval\s*\(/, 'User-entered code must never be evaluated as JavaScript');
 assert.doesNotMatch(Object.values(htmlByPage).join('\n') + css, /images\.unsplash\.com/, 'Old stock-photo dependencies should not return');
 
-console.log(`Site check passed: ${requiredPages.length} pages, local links/assets, Cloud Lab UI contract.`);
+console.log(`Site quality checks passed: ${requiredPages.length} pages, SEO metadata, accessibility landmarks, local assets and Cloud Lab structure.`);
