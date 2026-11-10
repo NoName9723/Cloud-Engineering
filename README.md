@@ -1,31 +1,19 @@
-# NEXORA — Cloud Engineering
+# NEXORA
 
-NEXORA est un projet de démonstration consacré au Cloud Engineering et au Platform Engineering.
+NEXORA est un projet de démonstration consacré aux plateformes numériques et aux environnements cloud.
 
-Le site présente une approche de conception de plateformes numériques fiables, sécurisées et évolutives, ainsi que plusieurs domaines de l'ingénierie cloud.
+## Présentation
 
-## Démonstration
+Le projet propose une expérience web autour de la conception, de la fiabilité et de l'exploitation de services numériques modernes.
 
-[Consulter le site NEXORA](https://noname9723.github.io/Cloud-Engineering/)
+[Visiter le site NEXORA](https://noname9723.github.io/Cloud-Engineering/)
 
-## Domaines présentés
+## À propos
 
-- Architecture et infrastructure cloud
-- Platform Engineering et automatisation
-- DevSecOps, sécurité et fiabilité
-- Technologies et exploitation des plateformes
-- Expériences interactives autour du cloud
+NEXORA est une marque fictive créée dans le cadre d'un projet personnel. Les contenus présentés sont fournis à titre illustratif et ne représentent ni des clients réels ni une offre commerciale.
 
-## Technologies principales
-
-HTML, CSS, JavaScript, Node.js et PostgreSQL.
-
-## Statut
-
-NEXORA est une marque fictive utilisée dans le cadre d'un projet de démonstration. Les contenus et exemples présentés ne constituent pas des références clients ni une offre commerciale.
-
-Le site actuellement publié sur GitHub Pages correspond à sa version statique. Les fonctionnalités nécessitant un serveur sont développées séparément.
+Le projet est en cours d'évolution.
 
 ---
 
-**Note sur la visibilité :** ce dépôt est public. Le README présente volontairement une vue d'ensemble, mais les fichiers du dépôt restent consultables. Aucune clé, aucun mot de passe et aucune donnée privée ne doivent être ajoutés au dépôt.
+Ce dépôt étant public, son code et ses fichiers restent consultables. Aucune information confidentielle, clé d'accès, mot de passe ou donnée personnelle ne doit y être publiée.
