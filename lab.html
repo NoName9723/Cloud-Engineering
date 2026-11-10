@@ -15,20 +15,20 @@
 <main>
 <section class="page-hero lab-page-hero"><div class="breadcrumbs"><a href="index.html">Accueil</a> / Cloud Lab</div>
 <div class="page-hero-grid"><div><p class="eyebrow"><span class="eyebrow-line"></span> NEXORA / INCIDENT RESPONSE TRAINING</p><h1>La production est en panne. <em>À vous de jouer.</em></h1><p class="hero-lead">Vous prenez l'astreinte d'une plateforme cloud. Diagnostiquez les incidents, corrigez les fichiers de configuration, faites passer les tests et redéployez sans casser le reste.</p></div>
-<aside class="page-hero-aside"><strong>Une campagne, un seul système.</strong>5 incidents liés au même service, de Kubernetes à la chaîne CI/CD. Les erreurs persistent jusqu'à ce que vous trouviez et appliquiez une correction validée.</aside></div></section>
+<aside class="page-hero-aside"><strong>Une campagne, un seul système.</strong>6 incidents liés au même service, de Kubernetes à la chaîne CI/CD. Les erreurs persistent jusqu'à ce que vous trouviez et appliquiez une correction validée.</aside></div></section>
 <section class="content-section lab-content">
 <div class="lab-briefing"><div><div class="section-kicker">MISSION PRINCIPALE / NX-OPS-017</div><h2>Restaurer la plateforme NEXORA.</h2><p class="content-lead">L'application publique renvoie des erreurs. Le déploiement est instable, le routage ne répond plus correctement et plusieurs contrôles de production sont défaillants. Vous devez traiter les incidents dans l'ordre, comprendre les symptômes et corriger le code d'infrastructure.</p></div>
 <div class="briefing-side"><span class="briefing-label">ENVIRONNEMENT</span><b>Production · Europe West</b><span class="briefing-label">STACK</span><b>Kubernetes · NGINX · Terraform · GitHub Actions</b><span class="briefing-label">MODE</span><b>Simulation pédagogique locale</b></div></div>
 <div class="campaign-dashboard" id="cloud-campaign">
 <div class="campaign-topbar">
 <div class="service-state"><span class="state-dot" id="service-dot"></span><div><small>ÉTAT DU SERVICE</small><strong id="service-status">INCIDENT CRITIQUE</strong></div></div>
-<div class="campaign-kpis"><div><small>COMPOSANTS RESTAURÉS</small><strong id="kpi-restored">0 / 5</strong></div><div><small>TESTS VALIDÉS</small><strong id="kpi-tests">0 / 20</strong></div><div><small>SCORE TECHNIQUE</small><strong id="kpi-score">0 XP</strong></div></div>
+<div class="campaign-kpis"><div><small>COMPOSANTS RESTAURÉS</small><strong id="kpi-restored">0 / 6</strong></div><div><small>TESTS VALIDÉS</small><strong id="kpi-tests">0 / 24</strong></div><div><small>SCORE TECHNIQUE</small><strong id="kpi-score">0 XP</strong></div></div>
 <button class="reset-campaign" id="reset-campaign" type="button" title="Effacer la sauvegarde et recommencer">Réinitialiser ↻</button>
 </div>
 <div class="campaign-progress"><div class="campaign-progress-head"><span>PROGRESSION DE LA CAMPAGNE</span><strong id="campaign-progress-label">0 %</strong></div><div class="progress-track"><span id="campaign-progress-bar"></span></div></div>
 <div class="campaign-layout">
 <aside class="mission-rail">
-<div class="rail-heading"><span>FILE D'INCIDENTS</span><small>5 TICKETS</small></div>
+<div class="rail-heading"><span>FILE D'INCIDENTS</span><small>6 TICKETS</small></div>
 <div id="mission-list" class="mission-list" aria-label="Missions de la campagne"></div>
 <div class="mission-rail-note"><b>Conseil d'astreinte</b><p>Ne corrigez pas au hasard. Commencez par les commandes de diagnostic, lisez les logs, puis modifiez le fichier qui correspond à l'incident.</p></div>
 </aside>
