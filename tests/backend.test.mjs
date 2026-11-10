@@ -54,7 +54,12 @@ test('passwords are salted, hashed and verified without storing the clear text',
   const encoded = await hashPassword(password);
 
   assert.notEqual(encoded, password);
-  assert.match(encoded, /^scrypt\\$/);
+  assert.ok(encoded.startsWith('scrypt
+  assert.equal(await verifyPassword(password, encoded), true);
+  assert.equal(await verifyPassword('a-different-password', encoded), false);
+  assert.equal(await verifyPassword(password, 'invalid-hash'), false);
+});
+));
   assert.equal(await verifyPassword(password, encoded), true);
   assert.equal(await verifyPassword('a-different-password', encoded), false);
   assert.equal(await verifyPassword(password, 'invalid-hash'), false);
