@@ -24,3 +24,5 @@ jobs:
         run: node --check script.js
       - name: Check pages, links and Cloud Lab structure
         run: node tests/site-check.mjs
+      - name: Test incident scenarios and known repairs
+        run: node tests/cloud-lab.test.mjs
