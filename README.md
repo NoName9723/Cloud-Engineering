@@ -1,51 +1,31 @@
 # NEXORA — Cloud Engineering
 
-Site vitrine multipage de démonstration autour du Cloud Engineering et du Platform Engineering.
+NEXORA est un projet de démonstration consacré au Cloud Engineering et au Platform Engineering.
 
-## Pages
-- `index.html` — accueil et présentation générale
-- `expertise.html` — domaines d'expertise et méthode
-- `solutions.html` — détail des prestations et livrables
-- `architecture.html` — architecture de référence et onglets interactifs
-- `technologies.html` — panorama des technologies
-- `company.html` — approche et principes
-- `lab.html` — campagne interactive Cloud Incident Lab
-- `contact.html` — formulaire avec validation côté navigateur
-- `404.html` — page d'erreur personnalisée
+Le site présente une approche de conception de plateformes numériques fiables, sécurisées et évolutives, ainsi que plusieurs domaines de l'ingénierie cloud.
 
-## Cloud Incident Lab
-Campagne pédagogique en six incidents liés au même service :
-1. Corriger un Deployment Kubernetes (labels, readiness probe, port).
-2. Réparer le routage NGINX et l'upstream applicatif.
-3. Corriger une configuration Terraform de stockage (chiffrement, versioning, rétention).
-4. Réparer un workflow GitHub Actions (tests avant déploiement).
-5. Remettre en état l'Horizontal Pod Autoscaler (cible, bornes et seuil CPU).
-6. Réécrire une fonction JavaScript de readiness pour qu'elle retourne un état HTTP cohérent avec ses dépendances.
+## Démonstration
 
-Le joueur dispose d'un éditeur de code, d'un terminal de commandes simulées, d'une suite de 24 tests de code et de configuration, d'un journal d'événements et d'un déploiement verrouillé tant que tous les tests ne passent pas. La progression est sauvegardée localement dans le navigateur.
+[Consulter le site NEXORA](https://noname9723.github.io/Cloud-Engineering/)
 
-**Sécurité et limites :** le terminal n'exécute aucune commande système. Le code écrit dans l'éditeur n'est pas exécuté comme JavaScript et n'est envoyé à aucun serveur. Les validateurs vérifient des règles pédagogiques déterministes sur le texte des fichiers. La simulation ne provisionne aucune ressource cloud réelle et les résultats sont fictifs.
+## Domaines présentés
 
-## Qualité du site
-- Navigation utilisable au clavier, lien d'accès direct au contenu et indicateurs de focus visibles.
-- Politique de sécurité CSP restrictive : scripts locaux uniquement, connexions réseau désactivées dans les pages et objets embarqués interdits.
-- Prise en compte de la préférence système de réduction des animations.
-- Métadonnées SEO et Open Graph par page, URL canoniques, favicon, image de partage, sitemap et robots.txt.
-- Page 404 exclue de l'indexation.
+- Architecture et infrastructure cloud
+- Platform Engineering et automatisation
+- DevSecOps, sécurité et fiabilité
+- Technologies et exploitation des plateformes
+- Expériences interactives autour du cloud
 
-## Technologies
-HTML5, CSS3, JavaScript natif et illustrations vectorielles SVG. Aucun framework ni étape de compilation n'est requis. Les illustrations réseau et exploitation cloud sont des schémas conceptuels créés pour ce site ; les adresses IP sont des exemples.
+## Technologies principales
 
-## Tests automatisés
-GitHub Actions exécute automatiquement :
-- `node --check script.js` pour vérifier la syntaxe JavaScript ;
-- `node tests/site-check.mjs` pour contrôler les pages, les liens internes, les ressources locales, les métadonnées SEO et les principaux critères d'accessibilité ;
-- `node tests/cloud-lab.test.mjs` pour vérifier que les six incidents de départ échouent comme prévu et que les réparations de référence passent les 24 contrôles.
+HTML, CSS, JavaScript, Node.js et PostgreSQL.
 
-Le workflow se déclenche à chaque push et pull request vers `main`.
+## Statut
 
-## Publication
-Le site est conçu pour GitHub Pages : dépôt public, branche `main`, dossier `/(root)`.
+NEXORA est une marque fictive utilisée dans le cadre d'un projet de démonstration. Les contenus et exemples présentés ne constituent pas des références clients ni une offre commerciale.
 
-## Limites connues
-Le formulaire de contact est uniquement front-end : aucune donnée n'est transmise ni stockée. Pour recevoir des demandes, connecter un service de formulaire ou une API backend. NEXORA est une marque fictive utilisée pour la démonstration ; les contenus techniques illustrent des pratiques générales et ne constituent pas des références clients.
+Le site actuellement publié sur GitHub Pages correspond à sa version statique. Les fonctionnalités nécessitant un serveur sont développées séparément.
+
+---
+
+**Note sur la visibilité :** ce dépôt est public. Le README présente volontairement une vue d'ensemble, mais les fichiers du dépôt restent consultables. Aucune clé, aucun mot de passe et aucune donnée privée ne doivent être ajoutés au dépôt.
