@@ -32,7 +32,7 @@ for (const [page, html] of Object.entries(htmlByPage)) {
   assert.equal(new Set(ids).size, ids.length, `Duplicate id in ${page}`);
   assert.match(html, /<html lang=["']fr["']>/, `${page} must declare French as its language`);
   assert.match(html, /<title>[^<]+<\/title>/, `${page} must have a page title`);
-  assert.match(html, /<meta name=["']description["'] content=["'][^"']{30,}["']>/, `${page} needs a useful meta description`);
+  assert.match(html, /<meta name=["']description["'] content=["'][^"]{30,}["']>/, `${page} needs a useful meta description`);
   assert.match(html, /class=["']skip-link["'] href=["']#main-content["']/, `${page} needs a skip link`);
   assert.match(html, /<main id=["']main-content["']>/, `${page} needs a main landmark`);
   assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, `${page} must have exactly one H1`);
