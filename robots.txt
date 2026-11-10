@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /404.html
+Disallow: /account.html
 
 Sitemap: https://noname9723.github.io/Cloud-Engineering/sitemap.xml
