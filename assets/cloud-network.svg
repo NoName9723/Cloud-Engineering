@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">Cloud network topology</title><desc id="desc">Conceptual cloud network with public endpoint, gateway, private subnets and servers with example IP addresses.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#132b46"/><stop offset="1" stop-color="#091522"/></linearGradient>
+ <linearGradient id="cloud" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#285f9e"/><stop offset="1" stop-color="#173959"/></linearGradient>
+ <linearGradient id="node" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1c3857"/><stop offset="1" stop-color="#13283f"/></linearGradient>
+ <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" fill="none" stroke="#7ca5d4" stroke-opacity=".07" stroke-width="1"/></pattern>
+ <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="9" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1200" height="900" rx="24" fill="url(#bg)"/><rect width="1200" height="900" rx="24" fill="url(#grid)"/>
+<text x="72" y="77" fill="#7ea9dc" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="4">NEXORA / CLOUD NETWORK</text>
+<text x="72" y="113" fill="#e8f2ff" font-family="Arial,sans-serif" font-size="29" font-weight="700">Reference topology</text>
+<rect x="930" y="54" width="196" height="44" rx="22" fill="#163d3b" stroke="#2d8a78"/><circle cx="956" cy="76" r="6" fill="#4fce9d" filter="url(#glow)"/><text x="974" y="82" fill="#b5f4dd" font-family="Arial,sans-serif" font-size="15">NETWORK ONLINE</text>
+<!-- Cloud edge -->
+<path d="M435 260 C399 260 373 232 373 197 C373 163 401 136 436 136 C448 92 489 62 538 62 C593 62 637 101 646 153 C687 158 719 192 719 234 C719 278 684 312 640 312 H440 C399 312 368 284 368 248" fill="url(#cloud)" stroke="#6aa7ef" stroke-width="3"/>
+<path d="M480 203h130" stroke="#9ccaff" stroke-width="3" stroke-linecap="round" opacity=".75"/><path d="M545 167v72" stroke="#9ccaff" stroke-width="3" stroke-linecap="round" opacity=".75"/><circle cx="545" cy="203" r="10" fill="#9ccaff"/>
+<text x="545" y="272" fill="#fff" font-family="Arial,sans-serif" font-size="23" font-weight="700" text-anchor="middle">CLOUD EDGE</text>
+<text x="545" y="296" fill="#b9d8f7" font-family="Arial,sans-serif" font-size="15" text-anchor="middle">Public endpoint · 203.0.113.10</text>
+<!-- connector -->
+<path d="M545 313V353" stroke="#63a8f4" stroke-width="4" stroke-linecap="round"/><path d="M535 342l10 12 10-12" fill="none" stroke="#63a8f4" stroke-width="3"/>
+<rect x="360" y="358" width="370" height="118" rx="15" fill="url(#node)" stroke="#4c82bb" stroke-width="2"/>
+<rect x="386" y="386" width="53" height="53" rx="11" fill="#244d76"/><path d="M399 401h27M399 412h27M399 423h27" stroke="#9dcaff" stroke-width="3" stroke-linecap="round"/>
+<text x="461" y="405" fill="#eaf4ff" font-family="Arial,sans-serif" font-size="21" font-weight="700">NETWORK GATEWAY</text>
+<text x="461" y="434" fill="#a9c3de" font-family="Arial,sans-serif" font-size="15">WAF · Firewall · Load balancer</text>
+<text x="461" y="456" fill="#74b9ff" font-family="Arial,sans-serif" font-size="13">Private routing enabled</text>
+<!-- branches -->
+<path d="M545 477V508H300V549M545 508H900V549" fill="none" stroke="#5898d8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="300" cy="508" r="6" fill="#66b9ff"/><circle cx="900" cy="508" r="6" fill="#66b9ff"/>
+<!-- subnet cards -->
+<rect x="72" y="548" width="500" height="270" rx="17" fill="#11283f" stroke="#31608d" stroke-width="2"/>
+<rect x="628" y="548" width="500" height="270" rx="17" fill="#11283f" stroke="#31608d" stroke-width="2"/>
+<text x="108" y="592" fill="#75b8ff" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2">PRIVATE SUBNET A</text>
+<text x="108" y="621" fill="#eff7ff" font-family="Arial,sans-serif" font-size="22" font-weight="700">Application tier</text>
+<text x="108" y="648" fill="#9db4cc" font-family="Arial,sans-serif" font-size="15">10.20.1.0/24</text>
+<text x="664" y="592" fill="#75b8ff" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="2">PRIVATE SUBNET B</text>
+<text x="664" y="621" fill="#eff7ff" font-family="Arial,sans-serif" font-size="22" font-weight="700">Data tier</text>
+<text x="664" y="648" fill="#9db4cc" font-family="Arial,sans-serif" font-size="15">10.20.2.0/24</text>
+<!-- server icons -->
+<g transform="translate(110 680)"><rect width="195" height="91" rx="9" fill="#1a3a59" stroke="#487cac"/><rect x="15" y="16" width="164" height="24" rx="4" fill="#10263d"/><circle cx="29" cy="28" r="4" fill="#4fd0a0"/><path d="M43 28h115" stroke="#668caf" stroke-width="3" stroke-linecap="round"/><rect x="15" y="51" width="164" height="24" rx="4" fill="#10263d"/><circle cx="29" cy="63" r="4" fill="#4fd0a0"/><path d="M43 63h115" stroke="#668caf" stroke-width="3" stroke-linecap="round"/></g>
+<g transform="translate(340 680)"><rect width="195" height="91" rx="9" fill="#1a3a59" stroke="#487cac"/><rect x="15" y="16" width="164" height="24" rx="4" fill="#10263d"/><circle cx="29" cy="28" r="4" fill="#4fd0a0"/><path d="M43 28h115" stroke="#668caf" stroke-width="3" stroke-linecap="round"/><rect x="15" y="51" width="164" height="24" rx="4" fill="#10263d"/><circle cx="29" cy="63" r="4" fill="#4fd0a0"/><path d="M43 63h115" stroke="#668caf" stroke-width="3" stroke-linecap="round"/></g>
+<g transform="translate(666 680)"><rect width="195" height="91" rx="9" fill="#1a3a59" stroke="#487cac"/><rect x="15" y="16" width="164" height="24" rx="4" fill="#10263d"/><circle cx="29" cy="28" r="4" fill="#4fd0a0"/><path d="M43 28h115" stroke="#668caf" stroke-width="3" stroke-linecap="round"/><rect x="15" y="51" width="164" height="24" rx="4" fill="#10263d"/><circle cx="29" cy="63" r="4" fill="#4fd0a0"/><path d="M43 63h115" stroke="#668caf" stroke-width="3" stroke-linecap="round"/></g>
+<g transform="translate(896 680)"><rect width="195" height="91" rx="9" fill="#1a3a59" stroke="#487cac"/><rect x="15" y="16" width="164" height="24" rx="4" fill="#10263d"/><circle cx="29" cy="28" r="4" fill="#4fd0a0"/><path d="M43 28h115" stroke="#668caf" stroke-width="3" stroke-linecap="round"/><rect x="15" y="51" width="164" height="24" rx="4" fill="#10263d"/><circle cx="29" cy="63" r="4" fill="#4fd0a0"/><path d="M43 63h115" stroke="#668caf" stroke-width="3" stroke-linecap="round"/></g>
+<text x="120" y="798" fill="#a8c0d9" font-family="Arial,sans-serif" font-size="13">APP-01 · 10.20.1.10</text><text x="350" y="798" fill="#a8c0d9" font-family="Arial,sans-serif" font-size="13">APP-02 · 10.20.1.11</text>
+<text x="676" y="798" fill="#a8c0d9" font-family="Arial,sans-serif" font-size="13">DB-01 · 10.20.2.10</text><text x="906" y="798" fill="#a8c0d9" font-family="Arial,sans-serif" font-size="13">CACHE · 10.20.2.20</text>
+<text x="72" y="862" fill="#728da9" font-family="Arial,sans-serif" font-size="13">Illustration pédagogique · Adresses IP d’exemple · Architecture à adapter au contexte réel</text>
+</svg>
