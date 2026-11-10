@@ -128,7 +128,7 @@ if(cloudSim){
     nextButton.hidden=true;
     evaluateButton.hidden=false;
     summaryPanel.hidden=true;
-    restartButton.hidden=true;
+    restartButton.hidden=false;
     updateEstimate();
   }
 
