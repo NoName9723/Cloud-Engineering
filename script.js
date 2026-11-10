@@ -486,7 +486,7 @@ spec:
     const hints=Object.values(state.hints).reduce((sum,value)=>sum+Number(value||0),0);
     const attempts=Object.values(state.attempts).reduce((sum,value)=>sum+Number(value||0),0);
     $('final-summary').textContent='Vous avez restauré les '+missions.length+' composants, réussi les '+(missions.length*4)+' contrôles et obtenu '+score+' XP. La campagne est terminée.';
-    $('complete-stats').innerHTML='<div><small>INCIDENTS RÉSOLUS</small><b>'+solved+'/5</b></div><div><small>TESTS VALIDÉS</small><b>20/20</b></div><div><small>SCORE FINAL</small><b>'+score+' XP</b></div><div><small>INDICES UTILISÉS</small><b>'+hints+'</b></div>';
+    $('complete-stats').innerHTML='<div><small>INCIDENTS RÉSOLUS</small><b>'+solved+'/'+missions.length+'</b></div><div><small>TESTS VALIDÉS</small><b>'+(missions.length*4)+'/'+(missions.length*4)+'</b></div><div><small>SCORE FINAL</small><b>'+score+' XP</b></div><div><small>INDICES UTILISÉS</small><b>'+hints+'</b></div>';
     panel.hidden=false;
     panel.scrollIntoView({behavior:'smooth',block:'center'});
   }
