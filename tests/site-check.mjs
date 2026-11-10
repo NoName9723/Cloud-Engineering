@@ -59,13 +59,13 @@ for (const id of ['cloud-campaign','mission-list','code-editor','terminal-form',
   assert.ok(lab.includes(`id="${id}"`), `Cloud Lab is missing #${id}`);
 }
 const script = read('script.js');
-for (const configPath of ['k8s/deployment.yaml','nginx/nginx.conf','infra/storage.tf','.github/workflows/deploy.yml','k8s/hpa.yaml']) {
+for (const configPath of ['k8s/deployment.yaml','nginx/nginx.conf','infra/storage.tf','.github/workflows/deploy.yml','k8s/hpa.yaml','src/healthcheck.js']) {
   assert.ok(script.includes(configPath), `Cloud Lab scenario missing config file: ${configPath}`);
 }
 for (const missionId of ['deployment','routing','storage','pipeline','scaling']) {
   assert.ok(script.includes(`id:'${missionId}'`), `Cloud Lab mission missing: ${missionId}`);
 }
-assert.equal((script.match(/\{name:/g) || []).length, 20, 'The campaign must expose 20 automated configuration checks');
+assert.equal((script.match(/\{name:/g) || []).length, 24, 'The campaign must expose 24 automated code/configuration checks');
 assert.match(script, /Cloud Incident Lab/);
 assert.match(script, /localStorage/);
 assert.doesNotMatch(script, /\beval\s*\(/, 'User-entered code must never be evaluated as JavaScript');
