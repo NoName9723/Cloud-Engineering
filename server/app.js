@@ -47,7 +47,7 @@ function protectInternalFiles(req, res, next) {
   );
 
   if (privatePrefix || PRIVATE_ROOT_FILES.has(requestedPath)) {
-    return res.sendFile('404.html', { root: ROOT });
+    return res.status(404).sendFile('404.html', { root: ROOT });
   }
 
   return next();
