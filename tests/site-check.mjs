@@ -14,23 +14,39 @@ const requiredPages = [
   'lab.html',
   '404.html'
 ];
+const supportFiles = [
+  'robots.txt',
+  'sitemap.xml',
+  'assets/favicon.svg',
+  'assets/og-cloud.svg'
+];
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
-const requiredSupportFiles = ['robots.txt', 'sitemap.xml', 'assets/favicon.svg', 'assets/og-cloud.svg'];
-for (const file of requiredSupportFiles) assert.ok(fs.existsSync(path.join(root, file)), `Missing support file: ${file}`);
 
-for (const page of requiredPages) {
-  assert.ok(fs.existsSync(path.join(root, page)), `Missing page: ${page}`);
+for (const file of [...requiredPages, ...supportFiles, 'styles.css', 'script.js']) {
+  assert.ok(fs.existsSync(path.join(root, file)), `Missing required file: ${file}`);
 }
 
 const htmlByPage = Object.fromEntries(requiredPages.map(page => [page, read(page)]));
-const allIds = {};
 for (const [page, html] of Object.entries(htmlByPage)) {
   const ids = [...html.matchAll(/\bid=["']([^"']+)["']/g)].map(match => match[1]);
   assert.equal(new Set(ids).size, ids.length, `Duplicate id in ${page}`);
-  allIds[page] = new Set(ids);
+  assert.match(html, /<html lang=["']fr["']>/, `${page} must declare French as its language`);
+  assert.match(html, /<title>[^<]+<\/title>/, `${page} must have a page title`);
+  assert.match(html, /<meta name=["']description["'] content=["'][^"']{30,}["']>/, `${page} needs a useful meta description`);
+  assert.match(html, /class=["']skip-link["'] href=["']#main-content["']/, `${page} needs a skip link`);
+  assert.match(html, /<main id=["']main-content["']>/, `${page} needs a main landmark`);
+  assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, `${page} must have exactly one H1`);
+  assert.match(html, /rel=["']icon["']/, `${page} must load the favicon`);
+  assert.match(html, /property=["']og:title["']/, `${page} needs Open Graph title metadata`);
+  assert.match(html, /property=["']og:description["']/, `${page} needs Open Graph description metadata`);
   assert.match(html, /href=["']styles\.css["']/, `${page} must load styles.css`);
+
   if (page !== '404.html') {
     assert.match(html, /src=["']script\.js["']/, `${page} must load script.js`);
+    assert.match(html, /rel=["']canonical["']/, `${page} needs a canonical URL`);
+    assert.match(html, /data-page=/, `${page} needs a page identifier`);
+  } else {
+    assert.match(html, /name=["']robots["'] content=["']noindex,follow["']/, '404 page must not be indexed');
   }
 
   for (const match of html.matchAll(/(?:href|src)=["']([^"'#]+)(?:#([^"']+))?["']/g)) {
@@ -55,12 +71,25 @@ for (const match of css.matchAll(/url\(["']?([^"')]+)["']?\)/g)) {
   if (/^(?:https?:|data:)/i.test(asset)) continue;
   assert.ok(fs.existsSync(path.join(root, asset)), `Missing CSS asset: ${asset}`);
 }
+assert.match(css, /:focus-visible/, 'Keyboard focus indicators must be present');
+assert.match(css, /prefers-reduced-motion:reduce/, 'Reduced-motion preferences must be respected');
+
+const script = read('script.js');
+assert.match(script, /event\.key==='Escape'/, 'The mobile menu must close on Escape');
+assert.match(script, /event\.key==='ArrowRight'/, 'Tabbed interfaces must support arrow-key navigation');
+assert.match(script, /localStorage/, 'Cloud Lab progress must be saved locally');
+assert.doesNotMatch(script, /\beval\s*\(/, 'User-entered code must never be evaluated as JavaScript');
+assert.doesNotMatch(Object.values(htmlByPage).join('\n') + css, /images\.unsplash\.com/, 'Removed stock-photo dependencies must not return');
 
 const lab = htmlByPage['lab.html'];
 for (const id of ['cloud-campaign','mission-list','code-editor','terminal-form','run-tests','deploy-fix','test-list','event-timeline','campaign-complete']) {
   assert.ok(lab.includes(`id="${id}"`), `Cloud Lab is missing #${id}`);
 }
-const script = read('script.js');
+assert.match(lab, /role=["']tablist["']/, 'Cloud Lab tools must expose a tablist role');
+assert.match(lab, /aria-controls=["']lab-panel-editor["']/, 'Cloud Lab tabs must be linked to their panels');
+
+const architecture = htmlByPage['architecture.html'];
+assert.match(architecture, /aria-controls=["']architecture-panel-containers["']/, 'Architecture tabs must identify their panels');
 for (const configPath of ['k8s/deployment.yaml','nginx/nginx.conf','infra/storage.tf','.github/workflows/deploy.yml','k8s/hpa.yaml','src/healthcheck.js']) {
   assert.ok(script.includes(configPath), `Cloud Lab scenario missing config file: ${configPath}`);
 }
@@ -68,9 +97,15 @@ for (const missionId of ['deployment','routing','storage','pipeline','scaling','
   assert.ok(script.includes(`id:'${missionId}'`), `Cloud Lab mission missing: ${missionId}`);
 }
 assert.equal((script.match(/\{name:/g) || []).length, 24, 'The campaign must expose 24 automated code/configuration checks');
-assert.match(script, /Cloud Incident Lab/);
-assert.match(script, /localStorage/);
-assert.doesNotMatch(script, /\beval\s*\(/, 'User-entered code must never be evaluated as JavaScript');
-assert.doesNotMatch(Object.values(htmlByPage).join('\n') + css, /images\.unsplash\.com/, 'Old stock-photo dependencies should not return');
 
-console.log(`Site quality checks passed: ${requiredPages.length} pages, SEO metadata, accessibility landmarks, local assets and Cloud Lab structure.`);
+const robots = read('robots.txt');
+const sitemap = read('sitemap.xml');
+assert.match(robots, /Sitemap: https:\/\/noname9723\.github\.io\/Cloud-Engineering\/sitemap\.xml/);
+for (const page of requiredPages.filter(page => page !== '404.html')) {
+  const url = page === 'index.html'
+    ? 'https://noname9723.github.io/Cloud-Engineering/'
+    : `https://noname9723.github.io/Cloud-Engineering/${page}`;
+  assert.ok(sitemap.includes(url), `Sitemap is missing ${page}`);
+}
+
+console.log(`Site quality checks passed: ${requiredPages.length} pages, SEO, accessibility, local assets and Cloud Lab structure.`);
