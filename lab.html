@@ -5,6 +5,7 @@
 <meta name="description" content="NEXORA Cloud Incident Lab : campagne de diagnostic, de correction et de remise en service d'une plateforme cloud.">
 <title>Cloud Incident Lab — NEXORA</title><link rel="stylesheet" href="styles.css">
 <meta name="theme-color" content="#101d2d">
+  <link rel="canonical" href="https://noname9723.github.io/Cloud-Engineering/lab.html">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="NEXORA">
@@ -13,6 +14,7 @@
   <meta property="og:description" content="NEXORA Cloud Incident Lab : campagne de diagnostic, de correction et de remise en service d'une plateforme cloud.">
   <meta property="og:url" content="https://noname9723.github.io/Cloud-Engineering/lab.html">
   <meta property="og:image" content="https://noname9723.github.io/Cloud-Engineering/assets/og-cloud.svg">
+  <meta property="og:image:alt" content="NEXORA — Cloud Engineering, Platform Architecture et Reliability">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Cloud Incident Lab — NEXORA">
   <meta name="twitter:description" content="NEXORA Cloud Incident Lab : campagne de diagnostic, de correction et de remise en service d'une plateforme cloud.">
@@ -53,29 +55,29 @@
 </div>
 <div class="incident-details" id="incident-details"><div><small>SYMPTÔME</small><b>Pods non disponibles</b></div><div><small>IMPACT</small><b>API indisponible</b></div><div><small>FICHIER À CORRIGER</small><b>deployment.yaml</b></div></div>
 <div class="work-tabs" role="tablist" aria-label="Outils de diagnostic">
-<button class="work-tab active" type="button" data-work-tab="editor" aria-selected="true">Éditeur de code</button>
-<button class="work-tab" type="button" data-work-tab="terminal" aria-selected="false">Terminal</button>
-<button class="work-tab" type="button" data-work-tab="tests" aria-selected="false">Tests & validation <span id="tab-test-count">0/4</span></button>
-<button class="work-tab" type="button" data-work-tab="logs" aria-selected="false">Journal d'événements</button>
+<button id="lab-tab-editor" class="work-tab active" type="button" role="tab" aria-controls="lab-panel-editor" data-work-tab="editor" aria-selected="true" tabindex="0">Éditeur de code</button>
+<button id="lab-tab-terminal" class="work-tab" type="button" role="tab" aria-controls="lab-panel-terminal" data-work-tab="terminal" aria-selected="false" tabindex="-1">Terminal</button>
+<button id="lab-tab-tests" class="work-tab" type="button" role="tab" aria-controls="lab-panel-tests" data-work-tab="tests" aria-selected="false" tabindex="-1">Tests & validation <span id="tab-test-count">0/4</span></button>
+<button id="lab-tab-logs" class="work-tab" type="button" role="tab" aria-controls="lab-panel-logs" data-work-tab="logs" aria-selected="false" tabindex="-1">Journal d'événements</button>
 </div>
-<section class="work-panel active" id="panel-editor" data-work-panel="editor">
+<section class="work-panel active" id="lab-panel-editor" role="tabpanel" aria-labelledby="lab-tab-editor" tabindex="0" data-work-panel="editor">
 <div class="editor-toolbar"><div><span class="file-icon">▤</span><b id="editor-filename">k8s/deployment.yaml</b><span class="file-state" id="editor-file-state">MODIFIÉ REQUIS</span></div><span class="editor-language" id="editor-language">YAML</span></div>
 <div class="editor-instructions"><b>Objectif :</b> <span id="editor-task">Réparer le sélecteur de pods et la sonde de disponibilité.</span><span id="editor-hint" class="editor-hint" hidden></span></div>
 <div class="editor-shell"><div class="line-numbers" id="line-numbers" aria-hidden="true">1</div><textarea id="code-editor" class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Éditeur de code" wrap="off"></textarea></div>
 <div class="editor-footer"><span id="editor-status">Modifiez le fichier puis lancez les tests.</span><div><button class="tool-button subtle" id="hint-button" type="button">Afficher un indice</button><button class="tool-button primary" id="run-tests" type="button">Exécuter les tests <span>→</span></button></div></div>
 </section>
-<section class="work-panel" id="panel-terminal" data-work-panel="terminal" hidden>
+<section class="work-panel" id="lab-panel-terminal" role="tabpanel" aria-labelledby="lab-tab-terminal" tabindex="0" data-work-panel="terminal" hidden>
 <div class="terminal-toolbar"><span><i></i><i></i><i></i></span><b>nexora-ops — shell simulé</b><small>LECTURE SEULE / COMMANDES AUTORISÉES</small></div>
 <div class="terminal-output" id="terminal-output" role="log" aria-live="polite"><p><span class="term-muted">NEXORA Operations Shell v1.0</span></p><p>Environnement de formation prêt. Tapez <b>help</b> pour afficher les commandes.</p></div>
 <form class="terminal-form" id="terminal-form"><label for="terminal-input">ops@nexora:~$</label><input id="terminal-input" type="text" spellcheck="false" autocomplete="off" placeholder="help, status, kubectl get pods…" aria-label="Commande shell"><button type="submit">Exécuter</button></form>
 <div class="terminal-commands"><span>COMMANDES UTILES</span><button type="button" data-command="help">help</button><button type="button" data-command="status">status</button><button type="button" data-command="kubectl get pods">kubectl get pods</button><button type="button" data-command="curl -I https://app.nexora.local">curl app</button><button type="button" data-command="curl -I https://app.nexora.local/health">curl /health</button></div>
 </section>
-<section class="work-panel" id="panel-tests" data-work-panel="tests" hidden>
+<section class="work-panel" id="lab-panel-tests" role="tabpanel" aria-labelledby="lab-tab-tests" tabindex="0" data-work-panel="tests" hidden>
 <div class="tests-heading"><div><span class="section-kicker">VALIDATION TECHNIQUE</span><h3>Suite de tests de l'incident</h3><p>Les tests vérifient le contenu du fichier dans la simulation. Le déploiement reste verrouillé tant que tous les contrôles ne passent pas.</p></div><span class="test-summary" id="test-summary">NON EXÉCUTÉS</span></div>
 <div id="test-list" class="test-list"><div class="test-empty">Aucun test lancé pour le moment. Revenez à l'éditeur et exécutez la suite.</div></div>
 <div class="deploy-bar"><div><b>Déploiement contrôlé</b><small id="deploy-help">Tous les tests doivent réussir pour débloquer le déploiement.</small></div><button class="tool-button deploy-button" id="deploy-fix" type="button" disabled>Déployer la correction ↗</button></div>
 </section>
-<section class="work-panel" id="panel-logs" data-work-panel="logs" hidden>
+<section class="work-panel" id="lab-panel-logs" role="tabpanel" aria-labelledby="lab-tab-logs" tabindex="0" data-work-panel="logs" hidden>
 <div class="tests-heading"><div><span class="section-kicker">OBSERVABILITÉ</span><h3>Journal de l'incident</h3><p>Les événements apparaissent ici lorsque vous diagnostiquez, testez et déployez.</p></div><span class="test-summary">LIVE SIMULATION</span></div>
 <div class="event-timeline" id="event-timeline"></div>
 </section>
