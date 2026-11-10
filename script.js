@@ -2,15 +2,27 @@
 const menuButton=document.querySelector('.menu-toggle');
 const siteNav=document.querySelector('.site-nav');
 if(menuButton&&siteNav){
+  const closeMenu=({restoreFocus=false}={})=>{
+    siteNav.classList.remove('open');
+    menuButton.setAttribute('aria-expanded','false');
+    menuButton.setAttribute('aria-label','Ouvrir le menu');
+    if(restoreFocus)menuButton.focus();
+  };
   menuButton.addEventListener('click',()=>{
     const open=siteNav.classList.toggle('open');
     menuButton.setAttribute('aria-expanded',String(open));
     menuButton.setAttribute('aria-label',open?'Fermer le menu':'Ouvrir le menu');
   });
-  siteNav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
-    siteNav.classList.remove('open');
-    menuButton.setAttribute('aria-expanded','false');
-  }));
+  siteNav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>closeMenu()));
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&siteNav.classList.contains('open'))closeMenu({restoreFocus:true});
+  });
+  document.addEventListener('pointerdown',event=>{
+    if(siteNav.classList.contains('open')&&!siteNav.contains(event.target)&&!menuButton.contains(event.target))closeMenu();
+  });
+  window.addEventListener('resize',()=>{
+    if(window.matchMedia('(min-width: 951px)').matches)closeMenu();
+  });
 }
 const currentPage=document.body.dataset.page;
 const pageFiles={home:'index.html',expertise:'expertise.html',solutions:'solutions.html',architecture:'architecture.html',technologies:'technologies.html',company:'company.html',contact:'contact.html',lab:'lab.html'};
@@ -25,16 +37,41 @@ if('IntersectionObserver'in window){
   }),{threshold:.12});
   revealItems.forEach(item=>observer.observe(item));
 }else{revealItems.forEach(item=>item.classList.add('is-visible'));}
-document.querySelectorAll('[data-tab]').forEach(button=>button.addEventListener('click',()=>{
+const architectureTabButtons=[...document.querySelectorAll('[data-tab]')];
+function activateArchitectureTab(button,{focus=false}={}){
   const group=button.closest('[data-tabs]');
   if(!group)return;
-  group.querySelectorAll('[data-tab]').forEach(tab=>tab.setAttribute('aria-selected',String(tab===button)));
+  group.querySelectorAll('[data-tab]').forEach(tab=>{
+    const active=tab===button;
+    tab.setAttribute('aria-selected',String(active));
+    tab.setAttribute('tabindex',active?'0':'-1');
+  });
   group.querySelectorAll('[data-panel]').forEach(panel=>panel.hidden=panel.dataset.panel!==button.dataset.tab);
-}));
+  if(focus)button.focus();
+}
+architectureTabButtons.forEach((button,index)=>{
+  button.addEventListener('click',()=>activateArchitectureTab(button));
+  button.addEventListener('keydown',event=>{
+    const group=button.closest('[data-tabs]');
+    const tabs=[...group.querySelectorAll('[data-tab]')];
+    const current=tabs.indexOf(button);
+    let next=current;
+    if(event.key==='ArrowRight')next=(current+1)%tabs.length;
+    else if(event.key==='ArrowLeft')next=(current-1+tabs.length)%tabs.length;
+    else if(event.key==='Home')next=0;
+    else if(event.key==='End')next=tabs.length-1;
+    else return;
+    event.preventDefault();
+    activateArchitectureTab(tabs[next],{focus:true});
+  });
+  button.setAttribute('tabindex',button.getAttribute('aria-selected')==='true'?'0':'-1');
+});
 document.querySelectorAll('[data-faq]').forEach(button=>button.addEventListener('click',()=>{
   const answer=document.getElementById(button.getAttribute('aria-controls'));
   const expanded=button.getAttribute('aria-expanded')==='true';
   button.setAttribute('aria-expanded',String(!expanded));
+  const icon=button.querySelector('span');
+  if(icon)icon.textContent=expanded?'＋':'−';
   if(answer)answer.hidden=expanded;
 }));
 const contactForm=document.querySelector('#contact-form');
@@ -329,11 +366,13 @@ spec:
   function nextOpenIndex(){const next=missions.findIndex(m=>!state.solved.includes(m.id));return next<0?missions.length-1:next;}
   function totalScore(){return Object.values(state.scores).reduce((sum,value)=>sum+Number(value||0),0);}
   function totalTests(){return fixedCount()*4;}
-  function setTab(name){
+  function setTab(name,{focus=false}={}){
     workTabs.forEach(tab=>{
       const active=tab.dataset.workTab===name;
       tab.classList.toggle('active',active);
       tab.setAttribute('aria-selected',String(active));
+      tab.setAttribute('tabindex',active?'0':'-1');
+      if(active&&focus)tab.focus();
     });
     workPanels.forEach(panel=>{
       const active=panel.dataset.workPanel===name;
@@ -342,7 +381,20 @@ spec:
     });
     if(name==='terminal')$('terminal-input').focus();
   }
-  workTabs.forEach(tab=>tab.addEventListener('click',()=>setTab(tab.dataset.workTab)));
+  workTabs.forEach((tab,index)=>{
+    tab.addEventListener('click',()=>setTab(tab.dataset.workTab));
+    tab.addEventListener('keydown',event=>{
+      let next=index;
+      if(event.key==='ArrowRight')next=(index+1)%workTabs.length;
+      else if(event.key==='ArrowLeft')next=(index-1+workTabs.length)%workTabs.length;
+      else if(event.key==='Home')next=0;
+      else if(event.key==='End')next=workTabs.length-1;
+      else return;
+      event.preventDefault();
+      setTab(workTabs[next].dataset.workTab,{focus:true});
+    });
+    tab.setAttribute('tabindex',tab.getAttribute('aria-selected')==='true'?'0':'-1');
+  });
 
   function renderCampaignStats(){
     const fixed=fixedCount();
