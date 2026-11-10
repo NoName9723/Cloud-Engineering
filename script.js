@@ -77,15 +77,53 @@ document.querySelectorAll('[data-faq]').forEach(button=>button.addEventListener(
 }));
 const contactForm=document.querySelector('#contact-form');
 if(contactForm){
-  contactForm.addEventListener('submit',event=>{
+  contactForm.addEventListener('submit',async event=>{
     event.preventDefault();
     if(!contactForm.reportValidity())return;
+
     const result=document.querySelector('#form-result');
-    if(result){
-      result.textContent='Formulaire validé. Cette version statique ne transmet pas les données : un service de formulaire ou un backend devra être connecté pour recevoir réellement votre demande.';
+    const submitButton=contactForm.querySelector('button[type="submit"]');
+    const setResult=(message,isError=false)=>{
+      if(!result)return;
+      result.textContent=message;
+      result.dataset.state=isError?'error':'success';
       result.classList.add('visible');
+    };
+
+    submitButton.disabled=true;
+    submitButton.setAttribute('aria-busy','true');
+    setResult('Transmission de votre demande…');
+
+    try{
+      const csrfResponse=await fetch('/api/auth/csrf',{credentials:'same-origin'});
+      const csrfPayload=await csrfResponse.json().catch(()=>({}));
+      if(!csrfResponse.ok||!csrfPayload.csrfToken){
+        throw new Error(csrfPayload.error?.message||'Le serveur de réception est indisponible.');
+      }
+
+      const payload=Object.fromEntries(new FormData(contactForm).entries());
+      const response=await fetch('/api/contact',{
+        method:'POST',
+        credentials:'same-origin',
+        headers:{
+          'Content-Type':'application/json',
+          'X-CSRF-Token':csrfPayload.csrfToken
+        },
+        body:JSON.stringify(payload)
+      });
+      const responsePayload=await response.json().catch(()=>({}));
+      if(!response.ok){
+        throw new Error(responsePayload.error?.message||'La demande n’a pas pu être enregistrée.');
+      }
+
+      setResult('Votre demande a bien été enregistrée. Référence : '+responsePayload.reference);
+      contactForm.reset();
+    }catch(error){
+      setResult(error.message||'Une erreur est survenue. Réessayez plus tard.',true);
+    }finally{
+      submitButton.disabled=false;
+      submitButton.removeAttribute('aria-busy');
     }
-    contactForm.reset();
   });
 }
 
