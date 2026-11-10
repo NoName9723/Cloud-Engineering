@@ -13,7 +13,3 @@ Le projet propose une expérience web autour de la conception, de la fiabilité 
 NEXORA est une marque fictive créée dans le cadre d'un projet personnel. Les contenus présentés sont fournis à titre illustratif et ne représentent ni des clients réels ni une offre commerciale.
 
 Le projet est en cours d'évolution.
-
----
-
-Ce dépôt étant public, son code et ses fichiers restent consultables. Aucune information confidentielle, clé d'accès, mot de passe ou donnée personnelle ne doit y être publiée.
