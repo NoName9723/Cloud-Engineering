@@ -531,6 +531,7 @@ spec:
     if(key==='terraform plan'||key==='terraform validate')return currentDiagnostic(key)||'Terraform: configuration disponible. Aucun contrôle de stockage bloquant sur cet incident.';
     if(key==='npm test'||key==='npm run test:unit')return currentDiagnostic('npm test')||'Tests applicatifs : suite de démonstration. Aucun problème signalé à cette étape.';
     if(key==='kubectl get hpa')return currentDiagnostic('kubectl get hpa')||'NAME         REFERENCE              TARGETS   MINPODS   MAXPODS\nnexora-api   Deployment/nexora-api  40%/65%   2         10';
+    if(key==='curl -i https://app.nexora.local/health'&&mission.diagnostics['curl -I https://app.nexora.local/health'])return mission.diagnostics['curl -I https://app.nexora.local/health'];
     if(key==='curl -i https://app.nexora.local/health'||key==='curl -i https://app.nexora.local'||key==='curl -i https://app.nexora.local/'){
       return fixedCount()===missions.length?'HTTP/2 200\ncontent-type: text/html\nx-platform-status: operational\n\nNEXORA service is healthy.':'HTTP/2 503\nserver: nexora-edge\nx-platform-status: incident-open\n\nThe active incident is not resolved yet.';
     }
