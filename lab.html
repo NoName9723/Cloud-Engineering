@@ -1,39 +1,77 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Cloud Lab NEXORA : mini-simulation de capacité et de résilience cloud."><title>Cloud Lab — NEXORA</title><link rel="stylesheet" href="styles.css"></head><body data-page="lab"><header class="site-header"><a class="brand" href="index.html" aria-label="NEXORA, accueil"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a><button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="expertise.html">Expertise</a><a href="solutions.html">Solutions</a><a href="architecture.html">Architecture</a><a href="technologies.html">Technologies</a><a href="company.html">Entreprise</a><a href="lab.html">Cloud Lab</a><a class="nav-contact" href="contact.html">Contact <span>↗</span></a></nav></header><main>
-<section class="page-hero"><div class="breadcrumbs"><a href="index.html">Accueil</a> / Cloud Lab</div><div class="page-hero-grid"><div><p class="eyebrow"><span class="eyebrow-line"></span> NEXORA / INTERACTIVE LAB</p><h1>Pilotez votre plateforme. <em>Gardez le contrôle.</em></h1><p class="hero-lead">Une simulation courte pour comprendre les arbitrages entre capacité, cache, autoscaling, disponibilité et budget.</p></div><aside class="page-hero-aside"><strong>Votre mission</strong>Maintenir cinq services en ligne pendant des variations de trafic, sans dépasser votre enveloppe de crédits.</aside></div></section>
-<section class="content-section"><div class="lab-intro"><div><div class="section-kicker">01 — CLOUD CAPACITY SIMULATOR</div><h2>Vous êtes de garde sur la plateforme.</h2><p class="content-lead">Chaque mission présente une charge différente. Configurez vos instances et les options disponibles, puis lancez la simulation. Une configuration trop petite provoque de la saturation ; une configuration surdimensionnée consomme inutilement le budget.</p></div><div class="lab-intro-note"><span class="live-dot"></span><div><b>Simulation locale</b><small>Aucun cloud réel n'est connecté. Les résultats sont calculés dans votre navigateur.</small></div></div></div>
-<div class="lab-dashboard" id="cloud-sim">
-  <section class="lab-main-card">
-    <div class="lab-topline"><span class="lab-kicker">MISSION EN COURS</span><span class="lab-round" id="lab-round">MISSION 1 / 5</span></div>
-    <div class="lab-progress"><div class="lab-progress-track"><span id="lab-progress-fill"></span></div><span id="lab-progress-label">20 %</span></div>
-    <div class="lab-scenario">
-      <div class="lab-scenario-head"><span class="lab-scenario-icon">↗</span><span class="lab-scenario-type" id="lab-scenario-type">PIC API</span></div>
-      <h3 id="lab-scenario-title">API publique — montée soudaine</h3>
-      <p id="lab-scenario-description">Une campagne provoque un afflux de requêtes sur l'API publique.</p>
-      <div class="lab-demand"><div><small>CHARGE À ABSORBER</small><strong id="lab-demand">6 unités</strong></div><div><small>TYPE DE TRAFIC</small><strong id="lab-traffic-type">Mixte</strong></div></div>
-    </div>
-    <div class="lab-budget-row"><div><small>BUDGET TOTAL</small><strong>42 crédits</strong></div><div><small>CRÉDITS DÉPENSÉS</small><strong id="lab-spent">0</strong></div><div><small>RESTANT</small><strong id="lab-remaining">42</strong></div></div>
-    <div class="lab-config">
-      <div class="lab-config-title"><div><span class="section-kicker">02 — CONFIGURATION</span><h3>Ajustez les ressources.</h3></div><span class="lab-config-hint">1 instance = 2 unités de capacité</span></div>
-      <label class="lab-range-label" for="replica-range"><span>Instances applicatives</span><output id="replica-value" for="replica-range">3</output></label>
-      <input class="lab-range" id="replica-range" type="range" min="1" max="5" value="3" step="1">
-      <div class="lab-range-scale"><span>1 instance</span><span>5 instances</span></div>
-      <div class="lab-options">
-        <label class="lab-option"><input id="cache-toggle" type="checkbox"><span class="lab-option-box"><b>Cache activé</b><small>Réduit la charge des services orientés lecture.</small></span><span class="lab-option-cost">+1 crédit</span></label>
-        <label class="lab-option"><input id="autoscale-toggle" type="checkbox"><span class="lab-option-box"><b>Autoscaling activé</b><small>Ajoute jusqu'à 2 unités de capacité pendant le pic.</small></span><span class="lab-option-cost">+2 crédits</span></label>
-      </div>
-      <div class="lab-estimate"><div><small>CAPACITÉ ESTIMÉE</small><strong id="lab-capacity">6 unités</strong></div><div><small>COÛT DE CETTE CONFIGURATION</small><strong id="lab-cost">6 crédits</strong></div><div><small>CHARGE APRÈS OPTIMISATION</small><strong id="lab-effective-demand">6 unités</strong></div></div>
-      <p class="lab-budget-warning" id="lab-budget-warning" role="status" hidden></p>
-      <button class="button button-primary lab-action" id="lab-evaluate" type="button">Évaluer la configuration <span>↗</span></button>
-    </div>
-    <div class="lab-result" id="lab-result" hidden role="status" aria-live="polite"></div>
-    <div class="lab-end-actions"><button class="button button-primary" id="lab-next" type="button" hidden>Mission suivante <span>→</span></button><button class="button button-secondary" id="lab-restart" type="button">Recommencer la simulation ↻</button></div>
-    <div class="lab-summary" id="lab-summary" hidden aria-live="polite"></div>
-  </section>
-  <aside class="lab-sidebar">
-    <div class="lab-side-card"><span class="lab-kicker">RÈGLES DU LABORATOIRE</span><h3>Comment jouer ?</h3><ol><li>Analysez la charge et son type.</li><li>Choisissez le nombre d'instances.</li><li>Activez le cache si le trafic est orienté lecture.</li><li>Utilisez l'autoscaling pour absorber un pic ponctuel.</li><li>Gardez vos dépenses sous 42 crédits.</li></ol></div>
-    <div class="lab-side-card lab-side-dark"><span class="lab-kicker">REPÈRES TECHNIQUES</span><div class="lab-legend"><span class="legend-dot dot-blue"></span><div><b>Instances</b><small>Capacité applicative de base.</small></div></div><div class="lab-legend"><span class="legend-dot dot-green"></span><div><b>Cache</b><small>Diminue le travail répété sur les lectures.</small></div></div><div class="lab-legend"><span class="legend-dot dot-purple"></span><div><b>Autoscaling</b><small>Ajoute temporairement de la capacité.</small></div></div></div>
-    <div class="lab-side-footnote">Modèle simplifié à but pédagogique. Les coûts et unités ne correspondent à aucun fournisseur cloud réel.</div>
-  </aside>
-</div></section>
-<section class="dark-section"><div class="content-section"><div class="section-kicker">03 — CE QUE LA SIMULATION ILLUSTRE</div><div class="two-col"><div><h2>Une bonne décision est un compromis mesuré.</h2></div><div><p>Ajouter des instances améliore la capacité mais augmente le coût. Le cache est utile sur certains profils de trafic. L'autoscaling aide à encaisser les pointes, mais ne remplace pas une architecture correctement dimensionnée.</p><p>Dans un environnement réel, il faudrait aussi tenir compte des temps de démarrage, des limites CPU et mémoire, de la base de données, du réseau, des zones de disponibilité et des objectifs de service.</p></div></div></div></section>
-</main><footer class="site-footer"><div class="footer-main"><div><a class="brand brand-footer" href="index.html"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a><p>Cloud Engineering & Platform Architecture.<br>Des infrastructures pensées pour durer.</p></div><div class="footer-column"><b>Explorer</b><a href="expertise.html">Expertise</a><a href="solutions.html">Solutions</a><a href="architecture.html">Architecture</a></div><div class="footer-column"><b>Ressources</b><a href="technologies.html">Technologies</a><a href="company.html">Entreprise</a><a href="lab.html">Cloud Lab</a><a href="contact.html">Contact</a></div><div class="footer-note"><span>ENGINEERED FOR WHAT'S NEXT.</span><small>Site de démonstration — marque fictive.</small></div></div><div class="footer-bottom"><span>© 2026 NEXORA. Tous droits réservés.</span><a href="contact.html">Nous contacter ↗</a></div></footer><script src="script.js"></script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="NEXORA Cloud Incident Lab : campagne de diagnostic, de correction et de remise en service d'une plateforme cloud.">
+<title>Cloud Incident Lab — NEXORA</title><link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="lab">
+<header class="site-header">
+<a class="brand" href="index.html" aria-label="NEXORA, accueil"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a>
+<button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+<nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+<a href="index.html">Accueil</a><a href="expertise.html">Expertise</a><a href="solutions.html">Solutions</a><a href="architecture.html">Architecture</a><a href="technologies.html">Technologies</a><a href="company.html">Entreprise</a><a href="lab.html">Cloud Lab</a><a class="nav-contact" href="contact.html">Contact <span>↗</span></a>
+</nav></header>
+<main>
+<section class="page-hero lab-page-hero"><div class="breadcrumbs"><a href="index.html">Accueil</a> / Cloud Lab</div>
+<div class="page-hero-grid"><div><p class="eyebrow"><span class="eyebrow-line"></span> NEXORA / INCIDENT RESPONSE TRAINING</p><h1>La production est en panne. <em>À vous de jouer.</em></h1><p class="hero-lead">Vous prenez l'astreinte d'une plateforme cloud. Diagnostiquez les incidents, corrigez les fichiers de configuration, faites passer les tests et redéployez sans casser le reste.</p></div>
+<aside class="page-hero-aside"><strong>Une campagne, un seul système.</strong>5 incidents liés au même service, de Kubernetes à la chaîne CI/CD. Les erreurs persistent jusqu'à ce que vous trouviez et appliquiez une correction validée.</aside></div></section>
+<section class="content-section lab-content">
+<div class="lab-briefing"><div><div class="section-kicker">MISSION PRINCIPALE / NX-OPS-017</div><h2>Restaurer la plateforme NEXORA.</h2><p class="content-lead">L'application publique renvoie des erreurs. Le déploiement est instable, le routage ne répond plus correctement et plusieurs contrôles de production sont défaillants. Vous devez traiter les incidents dans l'ordre, comprendre les symptômes et corriger le code d'infrastructure.</p></div>
+<div class="briefing-side"><span class="briefing-label">ENVIRONNEMENT</span><b>Production · Europe West</b><span class="briefing-label">STACK</span><b>Kubernetes · NGINX · Terraform · GitHub Actions</b><span class="briefing-label">MODE</span><b>Simulation pédagogique locale</b></div></div>
+<div class="campaign-dashboard" id="cloud-campaign">
+<div class="campaign-topbar">
+<div class="service-state"><span class="state-dot" id="service-dot"></span><div><small>ÉTAT DU SERVICE</small><strong id="service-status">INCIDENT CRITIQUE</strong></div></div>
+<div class="campaign-kpis"><div><small>COMPOSANTS RESTAURÉS</small><strong id="kpi-restored">0 / 5</strong></div><div><small>TESTS VALIDÉS</small><strong id="kpi-tests">0 / 20</strong></div><div><small>SCORE TECHNIQUE</small><strong id="kpi-score">0 XP</strong></div></div>
+<button class="reset-campaign" id="reset-campaign" type="button" title="Effacer la sauvegarde et recommencer">Réinitialiser ↻</button>
+</div>
+<div class="campaign-progress"><div class="campaign-progress-head"><span>PROGRESSION DE LA CAMPAGNE</span><strong id="campaign-progress-label">0 %</strong></div><div class="progress-track"><span id="campaign-progress-bar"></span></div></div>
+<div class="campaign-layout">
+<aside class="mission-rail">
+<div class="rail-heading"><span>FILE D'INCIDENTS</span><small>5 TICKETS</small></div>
+<div id="mission-list" class="mission-list" aria-label="Missions de la campagne"></div>
+<div class="mission-rail-note"><b>Conseil d'astreinte</b><p>Ne corrigez pas au hasard. Commencez par les commandes de diagnostic, lisez les logs, puis modifiez le fichier qui correspond à l'incident.</p></div>
+</aside>
+<div class="workbench">
+<div class="incident-heading">
+<div><div class="incident-meta"><span id="incident-severity" class="severity severity-critical">SEV-1 · CRITIQUE</span><span id="incident-id">INC-001</span><span id="incident-stage">ÉTAPE 1 / 5</span></div><h2 id="incident-title">Déploiement API bloqué</h2><p id="incident-summary">Les pods ne deviennent pas Ready. Le service ne peut pas recevoir de trafic.</p></div>
+<div class="incident-state" id="incident-state">OUVERT</div>
+</div>
+<div class="incident-details" id="incident-details"><div><small>SYMPTÔME</small><b>Pods non disponibles</b></div><div><small>IMPACT</small><b>API indisponible</b></div><div><small>FICHIER À CORRIGER</small><b>deployment.yaml</b></div></div>
+<div class="work-tabs" role="tablist" aria-label="Outils de diagnostic">
+<button class="work-tab active" type="button" data-work-tab="editor" aria-selected="true">Éditeur de code</button>
+<button class="work-tab" type="button" data-work-tab="terminal" aria-selected="false">Terminal</button>
+<button class="work-tab" type="button" data-work-tab="tests" aria-selected="false">Tests & validation <span id="tab-test-count">0/4</span></button>
+<button class="work-tab" type="button" data-work-tab="logs" aria-selected="false">Journal d'événements</button>
+</div>
+<section class="work-panel active" id="panel-editor" data-work-panel="editor">
+<div class="editor-toolbar"><div><span class="file-icon">▤</span><b id="editor-filename">k8s/deployment.yaml</b><span class="file-state" id="editor-file-state">MODIFIÉ REQUIS</span></div><span class="editor-language" id="editor-language">YAML</span></div>
+<div class="editor-instructions"><b>Objectif :</b> <span id="editor-task">Réparer le sélecteur de pods et la sonde de disponibilité.</span><span id="editor-hint" class="editor-hint" hidden></span></div>
+<div class="editor-shell"><div class="line-numbers" id="line-numbers" aria-hidden="true">1</div><textarea id="code-editor" class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Éditeur de code" wrap="off"></textarea></div>
+<div class="editor-footer"><span id="editor-status">Modifiez le fichier puis lancez les tests.</span><div><button class="tool-button subtle" id="hint-button" type="button">Afficher un indice</button><button class="tool-button primary" id="run-tests" type="button">Exécuter les tests <span>→</span></button></div></div>
+</section>
+<section class="work-panel" id="panel-terminal" data-work-panel="terminal" hidden>
+<div class="terminal-toolbar"><span><i></i><i></i><i></i></span><b>nexora-ops — shell simulé</b><small>LECTURE SEULE / COMMANDES AUTORISÉES</small></div>
+<div class="terminal-output" id="terminal-output" role="log" aria-live="polite"><p><span class="term-muted">NEXORA Operations Shell v1.0</span></p><p>Environnement de formation prêt. Tapez <b>help</b> pour afficher les commandes.</p></div>
+<form class="terminal-form" id="terminal-form"><label for="terminal-input">ops@nexora:~$</label><input id="terminal-input" type="text" spellcheck="false" autocomplete="off" placeholder="help, status, kubectl get pods…" aria-label="Commande shell"><button type="submit">Exécuter</button></form>
+<div class="terminal-commands"><span>COMMANDES UTILES</span><button type="button" data-command="help">help</button><button type="button" data-command="status">status</button><button type="button" data-command="kubectl get pods">kubectl get pods</button><button type="button" data-command="curl -I https://app.nexora.local">curl app</button></div>
+</section>
+<section class="work-panel" id="panel-tests" data-work-panel="tests" hidden>
+<div class="tests-heading"><div><span class="section-kicker">VALIDATION TECHNIQUE</span><h3>Suite de tests de l'incident</h3><p>Les tests vérifient le contenu du fichier dans la simulation. Le déploiement reste verrouillé tant que tous les contrôles ne passent pas.</p></div><span class="test-summary" id="test-summary">NON EXÉCUTÉS</span></div>
+<div id="test-list" class="test-list"><div class="test-empty">Aucun test lancé pour le moment. Revenez à l'éditeur et exécutez la suite.</div></div>
+<div class="deploy-bar"><div><b>Déploiement contrôlé</b><small id="deploy-help">Tous les tests doivent réussir pour débloquer le déploiement.</small></div><button class="tool-button deploy-button" id="deploy-fix" type="button" disabled>Déployer la correction ↗</button></div>
+</section>
+<section class="work-panel" id="panel-logs" data-work-panel="logs" hidden>
+<div class="tests-heading"><div><span class="section-kicker">OBSERVABILITÉ</span><h3>Journal de l'incident</h3><p>Les événements apparaissent ici lorsque vous diagnostiquez, testez et déployez.</p></div><span class="test-summary">LIVE SIMULATION</span></div>
+<div class="event-timeline" id="event-timeline"></div>
+</section>
+<div class="workbench-footer"><span><i class="footer-status-dot"></i> Session locale · progression sauvegardée sur cet appareil</span><span id="campaign-save-status">SAUVEGARDE ACTIVE</span></div>
+</div>
+</div>
+<div class="campaign-complete" id="campaign-complete" hidden><div class="complete-icon">✓</div><span class="section-kicker">MISSION ACCOMPLIE</span><h2>La plateforme est de nouveau opérationnelle.</h2><p id="final-summary">Vous avez restauré tous les composants et validé la suite de tests.</p><div class="complete-stats" id="complete-stats"></div><button class="button button-primary" id="play-again" type="button">Rejouer la campagne ↻</button></div>
+</div>
+</section>
+<section class="dark-section"><div class="content-section"><div class="section-kicker">CE QUE VOUS APPRENEZ</div><div class="two-col"><div><h2>Diagnostiquer avant de modifier. Tester avant de déployer.</h2></div><div><p>Ce laboratoire reprend des gestes d'exploitation courants : lire des logs, comprendre un état Kubernetes, corriger une configuration NGINX, sécuriser un stockage, réparer un pipeline CI/CD et dimensionner une plateforme.</p><p>Les extraits sont simplifiés et contrôlés par une suite de tests pédagogique. Le terminal ne donne accès à aucun système réel et aucun code utilisateur n'est exécuté sur un serveur.</p></div></div></div></section>
+</main>
+<footer class="site-footer"><div class="footer-main"><div><a class="brand brand-footer" href="index.html"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a><p>Cloud Engineering & Platform Architecture.<br>Des infrastructures pensées pour durer.</p></div><div class="footer-column"><b>Explorer</b><a href="expertise.html">Expertise</a><a href="solutions.html">Solutions</a><a href="architecture.html">Architecture</a></div><div class="footer-column"><b>Ressources</b><a href="technologies.html">Technologies</a><a href="company.html">Entreprise</a><a href="lab.html">Cloud Lab</a><a href="contact.html">Contact</a></div><div class="footer-note"><span>ENGINEERED FOR WHAT'S NEXT.</span><small>Site de démonstration — marque fictive.</small></div></div><div class="footer-bottom"><span>© 2026 NEXORA. Tous droits réservés.</span><a href="contact.html">Nous contacter ↗</a></div></footer>
+<script src="script.js"></script></body></html>
