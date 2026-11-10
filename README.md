@@ -28,6 +28,7 @@ Le joueur dispose d'un éditeur de code, d'un terminal de commandes simulées, d
 
 ## Qualité du site
 - Navigation utilisable au clavier, lien d'accès direct au contenu et indicateurs de focus visibles.
+- Politique de sécurité CSP restrictive : scripts locaux uniquement, connexions réseau désactivées dans les pages et objets embarqués interdits.
 - Prise en compte de la préférence système de réduction des animations.
 - Métadonnées SEO et Open Graph par page, URL canoniques, favicon, image de partage, sitemap et robots.txt.
 - Page 404 exclue de l'indexation.
