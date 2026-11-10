@@ -210,3 +210,32 @@ button{touch-action:manipulation}
 @media(hover:hover){.site-nav a:not(.nav-contact):hover{color:var(--blue)}}
 @media(max-width:950px){.site-nav a[aria-current=page]:not(.nav-contact):after{left:0;right:auto;bottom:5px;width:28px}.site-nav .nav-contact[aria-current=page]{background:var(--blue-dark)}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+
+/* Member account */
+.account-layout{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:minmax(220px,.8fr) minmax(320px,1fr);gap:clamp(32px,6vw,88px);align-items:start}
+.account-copy h2{font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.15;letter-spacing:-.035em;margin:16px 0}
+.account-copy>p{color:var(--muted);max-width:430px}
+.account-security-note{margin-top:28px;padding:18px 20px;border-left:3px solid var(--blue);background:var(--pale);font-size:.9rem}
+.account-card{border:1px solid var(--line);border-radius:16px;background:#fff;padding:clamp(22px,4vw,36px);box-shadow:0 18px 50px rgba(16,29,45,.07)}
+.account-switch{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border-radius:10px;background:var(--pale)}
+.account-switch-button{border:0;border-radius:7px;padding:11px 12px;background:transparent;color:var(--muted);font:inherit;font-weight:700;cursor:pointer}
+.account-switch-button.is-active{background:#fff;color:var(--navy);box-shadow:0 2px 8px rgba(16,29,45,.08)}
+.account-form{display:grid;gap:17px;margin-top:26px}
+.account-form[hidden],.account-session[hidden]{display:none}
+.account-form h2,.account-session h2{margin:0 0 3px;font-size:1.45rem}
+.account-form label{display:grid;gap:7px;font-size:.9rem;font-weight:650;color:var(--ink)}
+.account-form input{width:100%;min-height:48px;border:1px solid #cfd8e3;border-radius:8px;padding:11px 13px;background:#fff;color:var(--ink);font:inherit}
+.account-form input:focus{outline:3px solid rgba(35,105,216,.16);border-color:var(--blue)}
+.account-form .button{width:100%;justify-content:center;margin-top:3px}
+.account-form .button:disabled,.account-session .button:disabled{opacity:.65;cursor:wait}
+.field-help{margin:-11px 0 0;color:var(--muted);font-size:.82rem}
+.account-session{margin-top:26px}
+.account-session p{color:var(--muted);overflow-wrap:anywhere}
+.account-session strong{color:var(--ink)}
+.account-status{min-height:28px;margin:18px 0 0;color:var(--muted);font-size:.9rem}
+.account-status[data-state="error"]{color:#a32929}
+.account-status[data-state="success"]{color:#276443}
+.form-result[data-state="error"]{color:#a32929}
+.form-result[data-state="success"]{color:#276443}
+@media(max-width:760px){.account-layout{grid-template-columns:1fr;gap:28px}.account-copy h2{max-width:540px}.account-security-note{margin-top:18px}}
