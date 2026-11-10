@@ -15,6 +15,7 @@ const requiredPages = [
   '404.html'
 ];
 const supportFiles = [
+  '.nojekyll',
   'robots.txt',
   'sitemap.xml',
   'assets/favicon.svg',
