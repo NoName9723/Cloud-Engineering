@@ -1,3 +1,4 @@
+document.documentElement.classList.add('js-ready');
 /* NEXORA site interactions */
 const menuButton=document.querySelector('.menu-toggle');
 const siteNav=document.querySelector('.site-nav');
