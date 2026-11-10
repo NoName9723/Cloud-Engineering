@@ -1,4 +1,4 @@
-name: Site quality checks
+name: Platform quality checks
 
 on:
   workflow_dispatch:
@@ -11,19 +11,24 @@ permissions:
   contents: read
 
 jobs:
-  static-checks:
-    name: Validate the static website
+  quality:
+    name: Static, backend and browser tests
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-      - name: Check JavaScript syntax
-        run: node --check script.js
-      - name: Check pages, links and Cloud Lab structure
-        run: node tests/site-check.mjs
-      - name: Test incident scenarios and known repairs
-        run: node tests/cloud-lab.test.mjs
+          node-version: 26
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Check static pages and Cloud Lab
+        run: npm run test:site
+      - name: Test backend validation and password handling
+        run: npm run test:unit
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Test browser navigation
+        run: npm run test:e2e
