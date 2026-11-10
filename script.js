@@ -54,7 +54,7 @@ if(contactForm){
 /* Cloud Incident Lab: deterministic, local-only educational simulation. */
 const campaignRoot=document.querySelector('#cloud-campaign');
 if(campaignRoot){
-  const STORAGE_KEY='nexora-cloud-incident-campaign-v3';
+  const STORAGE_KEY='nexora-cloud-incident-campaign-v4';
   const missions=[
     {
       id:'deployment',ticket:'INC-001',severity:'SEV-1 · CRITIQUE',title:'Déploiement API bloqué',
@@ -261,7 +261,37 @@ spec:
         {name:'Seuil CPU raisonnable',detail:'La cible averageUtilization doit être comprise entre 50 et 75 %.',check:c=>{const n=Number((c.match(/averageUtilization:\s*(\d+)/)||[])[1]||0);return n>=50&&n<=75;}}
       ]
     }
-  ];
+,
+    {
+      id:'api-health',ticket:'INC-006',severity:'SEV-1 · CRITIQUE',title:'API : faux état de santé',
+      summary:'L’endpoint /health renvoie HTTP 200 même lorsque des dépendances essentielles sont indisponibles.',
+      symptom:'Readiness trompeuse',impact:'Trafic envoyé vers une API incapable de répondre',file:'src/healthcheck.js',language:'JAVASCRIPT',
+      task:'Réécrivez getReadiness(dependencies). L’API doit être considérée prête uniquement si database, cache et queue sont tous disponibles. Retournez ok/200 si tout va bien, degraded/503 sinon.',
+      hint:'Créez une variable ready qui combine les trois dépendances avec &&. Utilisez ensuite ready pour déterminer status et httpStatus.',
+      initial:`export function getReadiness(dependencies) {
+  // BUG: the endpoint always declares the service healthy.
+  return {
+    status: "ok",
+    httpStatus: 200,
+    checks: {
+      database: dependencies.database,
+      cache: dependencies.cache,
+      queue: dependencies.queue
+    }
+  };
+}`,
+      diagnostics:{
+        'curl -I https://app.nexora.local/health':'HTTP/2 200\nx-health-status: ok\nx-database-status: unavailable\n\nThe health endpoint reports success while a required dependency is offline. This is a false-positive readiness check.',
+        'npm test':'FAIL src/healthcheck.test.js\n✓ database dependency is exposed\n✗ database outage must return 503\n✗ cache outage must return 503\n✗ queue outage must return 503\n\nThe readiness function does not evaluate dependency availability.',
+        'journalctl -u nexora-api':'WARN database connection pool unavailable\nWARN queue consumer disconnected\nINFO readiness endpoint returned 200\nERROR traffic routed to an unhealthy API instance'
+      },
+      tests:[
+        {name:'Fonction getReadiness exportée',detail:'Le module doit exporter getReadiness(dependencies).',check:c=>/export\s+function\s+getReadiness\s*\(\s*dependencies\s*\)/.test(c)},
+        {name:'Trois dépendances prises en compte',detail:'database, cache et queue doivent participer à la condition ready.',check:c=>{const m=c.match(/const\s+ready\s*=\s*Boolean\s*\(([\s\S]*?)\)\s*;/);return !!(m&&['database','cache','queue'].every(name=>m[1].includes('dependencies.'+name))&&(m[1].match(/&&/g)||[]).length>=2);}},
+        {name:'État applicatif cohérent',detail:'status doit retourner ok si ready, degraded sinon.',check:c=>/status:\s*ready\s*\?\s*["']ok["']\s*:\s*["']degraded["']/.test(c)},
+        {name:'Code HTTP cohérent',detail:'httpStatus doit retourner 200 si ready, 503 sinon.',check:c=>/httpStatus:\s*ready\s*\?\s*200\s*:\s*503/.test(c)}
+      ]
+    }  ];
 
   const freshState=()=>({solved:[],codes:{},scores:{},hints:{},attempts:{},events:[],selected:0});
   function loadCampaign(){
@@ -455,7 +485,7 @@ spec:
     const solved=state.solved.length;
     const hints=Object.values(state.hints).reduce((sum,value)=>sum+Number(value||0),0);
     const attempts=Object.values(state.attempts).reduce((sum,value)=>sum+Number(value||0),0);
-    $('final-summary').textContent='Vous avez restauré les 5 composants, réussi les 20 contrôles de configuration et obtenu '+score+' XP. La campagne est terminée.';
+    $('final-summary').textContent='Vous avez restauré les '+missions.length+' composants, réussi les '+(missions.length*4)+' contrôles et obtenu '+score+' XP. La campagne est terminée.';
     $('complete-stats').innerHTML='<div><small>INCIDENTS RÉSOLUS</small><b>'+solved+'/5</b></div><div><small>TESTS VALIDÉS</small><b>20/20</b></div><div><small>SCORE FINAL</small><b>'+score+' XP</b></div><div><small>INDICES UTILISÉS</small><b>'+hints+'</b></div>';
     panel.hidden=false;
     panel.scrollIntoView({behavior:'smooth',block:'center'});
@@ -502,9 +532,9 @@ spec:
     if(key==='npm test'||key==='npm run test:unit')return currentDiagnostic('npm test')||'Tests applicatifs : suite de démonstration. Aucun problème signalé à cette étape.';
     if(key==='kubectl get hpa')return currentDiagnostic('kubectl get hpa')||'NAME         REFERENCE              TARGETS   MINPODS   MAXPODS\nnexora-api   Deployment/nexora-api  40%/65%   2         10';
     if(key==='curl -i https://app.nexora.local/health'||key==='curl -i https://app.nexora.local'||key==='curl -i https://app.nexora.local/'){
-      return fixedCount()===5?'HTTP/2 200\ncontent-type: text/html\nx-platform-status: operational\n\nNEXORA service is healthy.':'HTTP/2 503\nserver: nexora-edge\nx-platform-status: incident-open\n\nThe active incident is not resolved yet.';
+      return fixedCount()===missions.length?'HTTP/2 200\ncontent-type: text/html\nx-platform-status: operational\n\nNEXORA service is healthy.':'HTTP/2 503\nserver: nexora-edge\nx-platform-status: incident-open\n\nThe active incident is not resolved yet.';
     }
-    if(key==='curl -i https://app.nexora.local/health'||key==='curl -i https://app.nexora.local'||key==='curl https://app.nexora.local')return fixedCount()===5?'200 OK — service healthy':'503 Service Unavailable — incident open';
+    if(key==='curl -i https://app.nexora.local/health'||key==='curl -i https://app.nexora.local'||key==='curl https://app.nexora.local')return fixedCount()===missions.length?'200 OK — service healthy':'503 Service Unavailable — incident open';
     if(key==='journalctl -u nexora-api'||key==='journalctl -u nexora-api --no-pager'){
       const map={
         deployment:'Readiness probe failed: GET /ready returned 404\nReplicaSet selector does not match pod labels\nService endpoints: 0 ready pods',
