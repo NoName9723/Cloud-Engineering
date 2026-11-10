@@ -58,14 +58,17 @@ const lab = htmlByPage['lab.html'];
 for (const id of ['cloud-campaign','mission-list','code-editor','terminal-form','run-tests','deploy-fix','test-list','event-timeline','campaign-complete']) {
   assert.ok(lab.includes(`id="${id}"`), `Cloud Lab is missing #${id}`);
 }
-assert.match(lab, /k8s\/deployment\.yaml/);
-assert.match(lab, /nginx\/nginx\.conf/);
-assert.match(lab, /infra\/storage\.tf/);
-assert.match(lab, /\.github\/workflows\/deploy\.yml/);
-assert.match(lab, /k8s\/hpa\.yaml/);
-assert.match(read('script.js'), /NEXORA Cloud Incident Lab|Cloud Incident Lab/);
-assert.match(read('script.js'), /localStorage/);
-assert.doesNotMatch(read('script.js'), /\beval\s*\(/, 'User-entered code must never be evaluated as JavaScript');
+const script = read('script.js');
+for (const configPath of ['k8s/deployment.yaml','nginx/nginx.conf','infra/storage.tf','.github/workflows/deploy.yml','k8s/hpa.yaml']) {
+  assert.ok(script.includes(configPath), `Cloud Lab scenario missing config file: ${configPath}`);
+}
+for (const missionId of ['deployment','routing','storage','pipeline','scaling']) {
+  assert.ok(script.includes(`id:'${missionId}'`), `Cloud Lab mission missing: ${missionId}`);
+}
+assert.equal((script.match(/\{name:/g) || []).length, 20, 'The campaign must expose 20 automated configuration checks');
+assert.match(script, /Cloud Incident Lab/);
+assert.match(script, /localStorage/);
+assert.doesNotMatch(script, /\beval\s*\(/, 'User-entered code must never be evaluated as JavaScript');
 assert.doesNotMatch(Object.values(htmlByPage).join('\n') + css, /images\.unsplash\.com/, 'Old stock-photo dependencies should not return');
 
 console.log(`Site check passed: ${requiredPages.length} pages, local links/assets, Cloud Lab UI contract.`);
