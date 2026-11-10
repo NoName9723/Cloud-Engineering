@@ -11,6 +11,47 @@ import { errorHandler, notFoundHandler } from './middleware/error-handler.js';
 
 const ROOT = process.cwd();
 const SESSION_LIFETIME = 7 * 24 * 60 * 60 * 1000;
+const PRIVATE_PATH_PREFIXES = [
+  '/server',
+  '/tests',
+  '/node_modules',
+  '/.github',
+  '/.git',
+  '/coverage',
+  '/playwright-report',
+  '/test-results'
+];
+const PRIVATE_ROOT_FILES = new Set([
+  '/package.json',
+  '/package-lock.json',
+  '/playwright.config.js',
+  '/README.md',
+  '/.env.example',
+  '/.nvmrc',
+  '/.gitignore'
+]);
+
+function protectInternalFiles(req, res, next) {
+  let requestedPath;
+  try {
+    const decodedPath = decodeURIComponent(req.path);
+    requestedPath = path.posix.normalize(
+      decodedPath.startsWith('/') ? decodedPath : '/' + decodedPath
+    );
+  } catch {
+    return res.status(400).end();
+  }
+
+  const privatePrefix = PRIVATE_PATH_PREFIXES.some(prefix =>
+    requestedPath === prefix || requestedPath.startsWith(prefix + '/')
+  );
+
+  if (privatePrefix || PRIVATE_ROOT_FILES.has(requestedPath)) {
+    return res.status(404).sendFile('404.html', { root: ROOT });
+  }
+
+  return next();
+}
 
 export function createApp({ database = defaultPool } = {}) {
   const app = express();
@@ -109,6 +150,10 @@ export function createApp({ database = defaultPool } = {}) {
       error: { code: 'ROUTE_NOT_FOUND', message: 'Cette ressource n’existe pas.' }
     });
   });
+
+  // The repository root also contains server code, tests and installed packages.
+  // Never expose those paths through the public static file handler.
+  app.use(protectInternalFiles);
 
   app.use(express.static(ROOT, {
     index: 'index.html',

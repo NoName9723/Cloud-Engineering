@@ -14,7 +14,27 @@ jobs:
   quality:
     name: Static, backend and browser tests
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://nexora:nexora_ci_only_password@localhost:5432/nexora_test
+      DATABASE_SSL: "false"
+      SESSION_SECRET: nexora-ci-only-session-secret-not-for-production-2026
+      TRUST_PROXY: "false"
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: nexora_test
+          POSTGRES_USER: nexora
+          POSTGRES_PASSWORD: nexora_ci_only_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U nexora -d nexora_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,5 +50,5 @@ jobs:
         run: npm run test:unit
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
-      - name: Test browser navigation
+      - name: Test browser navigation, authentication and contact flow
         run: npm run test:e2e

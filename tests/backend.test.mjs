@@ -87,6 +87,22 @@ test('API health and unavailable database responses are explicit', async () => {
     const missing = await fetch(baseUrl + '/api/not-a-route');
     assert.equal(missing.status, 404);
     assert.equal((await missing.json()).error.code, 'ROUTE_NOT_FOUND');
+
+    for (const internalPath of [
+      '/server/app.js',
+      '/server%2Fapp.js',
+      '/%2e%2e/server/app.js',
+      '/server/db/migrations/001_initial.sql',
+      '/tests/backend.test.mjs',
+      '/node_modules/express/package.json',
+      '/package.json',
+      '/package-lock.json',
+      '/playwright.config.js',
+      '/README.md'
+    ]) {
+      const response = await fetch(baseUrl + internalPath);
+      assert.equal(response.status, 404, 'Internal path must not be public: ' + internalPath);
+    }
   } finally {
     await new Promise((resolve, reject) => {
       server.close(error => error ? reject(error) : resolve());

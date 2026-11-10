@@ -134,7 +134,7 @@ for (const configPath of ['k8s/deployment.yaml','nginx/nginx.conf','infra/storag
 for (const missionId of ['deployment','routing','storage','pipeline','scaling','api-health']) {
   assert.ok(script.includes("id:'" + missionId + "'"), 'Cloud Lab mission missing: ' + missionId);
 }
-assert.equal((script.match(/\{name:/g) || []).length, 24, 'The campaign must expose 24 automated code/configuration checks');
+assert.equal((script.match(/\{name:'/g) || []).length, 24, 'The campaign must expose 24 automated code/configuration checks');
 
 const robots = read('robots.txt');
 const sitemap = read('sitemap.xml');
