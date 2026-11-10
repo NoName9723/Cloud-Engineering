@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+<title id="title">NEXORA — Cloud Engineering</title><desc id="desc">Cloud Engineering, Platform Architecture and Operations</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#142b45"/><stop offset="1" stop-color="#0b1726"/></linearGradient><pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse"><path d="M42 0H0V42" fill="none" stroke="#91b9e5" stroke-opacity=".08"/></pattern></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+<rect x="82" y="95" width="54" height="54" rx="11" fill="#fff"/><path d="M123 109H96c-10 0-16 6-16 13s6 13 16 13h27v-9H97c-4 0-7-2-7-4s3-4 7-4h26z" fill="#101d2d"/><circle cx="126" cy="109" r="5" fill="#3985e8"/>
+<text x="158" y="132" fill="#fff" font-family="Arial,sans-serif" font-size="30" letter-spacing="7" font-weight="800">NEXORA</text>
+<text x="82" y="284" fill="#f4f8ff" font-family="Arial,sans-serif" font-size="72" font-weight="700" letter-spacing="-3">Cloud Engineering</text>
+<text x="87" y="350" fill="#a9c1dc" font-family="Arial,sans-serif" font-size="29">Platform Architecture · Automation · Reliability</text>
+<rect x="87" y="420" width="300" height="5" rx="3" fill="#3985e8"/>
+<text x="87" y="480" fill="#7da6d2" font-family="Arial,sans-serif" font-size="18" letter-spacing="3">ENGINEERED FOR WHAT'S NEXT</text>
+<g transform="translate(830 160)" fill="none" stroke="#4c94e8" stroke-width="3"><path d="M80 120h230M195 120V220M80 120V220M310 120V220M80 220h230"/><rect x="15" y="50" width="130" height="75" rx="10" fill="#173959"/><rect x="245" y="50" width="130" height="75" rx="10" fill="#173959"/><rect x="130" y="220" width="130" height="75" rx="10" fill="#173959"/><circle cx="80" cy="120" r="7" fill="#69b5ff"/><circle cx="310" cy="120" r="7" fill="#69b5ff"/></g>
+</svg>
