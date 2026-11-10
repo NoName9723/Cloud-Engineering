@@ -11,11 +11,25 @@ const requiredPages = [
   'technologies.html',
   'company.html',
   'contact.html',
+  'account.html',
   'lab.html',
   '404.html'
 ];
 const supportFiles = [
   '.nojekyll',
+  '.env.example',
+  'package.json',
+  'playwright.config.js',
+  'account.js',
+  'server/app.js',
+  'server/index.js',
+  'server/db.js',
+  'server/security.js',
+  'server/validation.js',
+  'server/routes/auth.routes.js',
+  'server/routes/contact.routes.js',
+  'tests/backend.test.mjs',
+  'tests/e2e/navigation.spec.js',
   'robots.txt',
   'sitemap.xml',
   'assets/favicon.svg',
@@ -83,6 +97,7 @@ assert.match(script, /event\.key==='Escape'/, 'The mobile menu must close on Esc
 assert.match(script, /event\.key==='ArrowRight'/, 'Tabbed interfaces must support arrow-key navigation');
 assert.match(script, /localStorage/, 'Cloud Lab progress must be saved locally');
 assert.doesNotMatch(script, /\beval\s*\(/, 'User-entered code must never be evaluated as JavaScript');
+assert.match(script, /fetch\('\/api\/contact'/, 'The contact form must submit through the backend API');
 assert.doesNotMatch(Object.values(htmlByPage).join('\n') + css, /images\.unsplash\.com/, 'Removed stock-photo dependencies must not return');
 
 const lab = htmlByPage['lab.html'];
@@ -91,6 +106,15 @@ for (const id of ['cloud-campaign','mission-list','code-editor','terminal-form',
 }
 assert.match(lab, /role=["']tablist["']/, 'Cloud Lab tools must expose a tablist role');
 assert.match(lab, /aria-controls=["']lab-panel-editor["']/, 'Cloud Lab tabs must be linked to their panels');
+
+
+const account = htmlByPage['account.html'];
+assert.match(account, /name=["']robots["'] content=["']noindex,nofollow["']/, 'The member area must not be indexed');
+assert.match(account, /id=["']login-form["']/, 'The member area must expose the login form');
+assert.match(account, /id=["']register-form["']/, 'The member area must expose the registration form');
+assert.match(account, /src=["']account\.js["']/, 'The member area must load its client controller');
+assert.match(account, /connect-src 'self'/, 'The member area must allow same-origin API calls');
+assert.match(htmlByPage['contact.html'], /Enregistrer|enregistrée/, 'The contact page must describe server-side submission');
 
 const architecture = htmlByPage['architecture.html'];
 assert.match(architecture, /aria-controls=["']architecture-panel-containers["']/, 'Architecture tabs must identify their panels');
@@ -105,7 +129,7 @@ assert.equal((script.match(/\{name:/g) || []).length, 24, 'The campaign must exp
 const robots = read('robots.txt');
 const sitemap = read('sitemap.xml');
 assert.match(robots, /Sitemap: https:\/\/noname9723\.github\.io\/Cloud-Engineering\/sitemap\.xml/);
-for (const page of requiredPages.filter(page => page !== '404.html')) {
+for (const page of requiredPages.filter(page => page !== '404.html' && page !== 'account.html')) {
   const url = page === 'index.html'
     ? 'https://noname9723.github.io/Cloud-Engineering/'
     : `https://noname9723.github.io/Cloud-Engineering/${page}`;
