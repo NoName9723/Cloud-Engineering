@@ -90,6 +90,8 @@ test('API health and unavailable database responses are explicit', async () => {
 
     for (const internalPath of [
       '/server/app.js',
+      '/server%2Fapp.js',
+      '/%2e%2e/server/app.js',
       '/server/db/migrations/001_initial.sql',
       '/tests/backend.test.mjs',
       '/node_modules/express/package.json',
