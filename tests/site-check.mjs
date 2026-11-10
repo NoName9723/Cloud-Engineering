@@ -39,6 +39,9 @@ for (const [page, html] of Object.entries(htmlByPage)) {
   assert.match(html, /rel=["']icon["']/, `${page} must load the favicon`);
   assert.match(html, /property=["']og:title["']/, `${page} needs Open Graph title metadata`);
   assert.match(html, /property=["']og:description["']/, `${page} needs Open Graph description metadata`);
+  assert.match(html, /http-equiv=["']Content-Security-Policy["']/, `${page} needs a content security policy`);
+  assert.doesNotMatch(html, /<script(?:\\s|>)(?![^>]*src=)/i, `${page} must not contain inline scripts`);
+  assert.doesNotMatch(html, /\\sstyle=/i, `${page} must not use inline style attributes`);
   assert.match(html, /href=["']styles\.css["']/, `${page} must load styles.css`);
 
   if (page !== '404.html') {
