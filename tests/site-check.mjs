@@ -68,7 +68,8 @@ for (const [page, html] of Object.entries(htmlByPage)) {
   assert.match(html, /href=["']styles\.css["']/, page + ' must load styles.css');
 
   if (page !== '404.html') {
-    assert.match(html, /src=["']script\.js["']/, page + ' must load script.js');
+    assert.match(html, /src=["']script\.js["'] defer/, page + ' must defer script.js');
+    assert.doesNotMatch(html, /<script src=["'][^"']+["']><\/script>/, page + ' must not block HTML parsing with scripts');
     assert.match(html, /rel=["']canonical["']/, page + ' needs a canonical URL');
     assert.match(html, /data-page=/, page + ' needs a page identifier');
   } else {
