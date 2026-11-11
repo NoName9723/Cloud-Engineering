@@ -32,10 +32,35 @@ jobs:
       - name: Run Lighthouse
         run: npx --yes @lhci/cli@0.15.1 autorun
 
+      - name: Debug Lighthouse report files
+        if: always()
+        run: |
+          echo "Current directory:"
+          pwd
+
+          echo "Repository files:"
+          ls -la
+
+          echo "Lighthouse files:"
+          find . -type f \( -name "*.html" -o -name "*.json" \) | grep -i lighthouse || true
+
+          echo "Lighthouse directory:"
+          find . -type d -name "*lighthouse*" || true
+
+          echo "Full .lighthouseci content:"
+          if [ -d ".lighthouseci" ]; then
+            find .lighthouseci -maxdepth 5 -print
+          else
+            echo ".lighthouseci directory does not exist"
+          fi
+
       - name: Upload Lighthouse reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: lighthouse-reports
-          path: .lighthouseci/**
+          path: |
+            .lighthouseci/**
+            **/lighthouse-report*.html
+            **/lighthouse-report*.json
           if-no-files-found: warn
