@@ -37,5 +37,5 @@ jobs:
         if: always()
         with:
           name: lighthouse-reports
-          path: .lighthouseci
+          path: .lighthouseci/**
           if-no-files-found: warn
