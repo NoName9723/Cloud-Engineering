@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="NEXORA Cloud Incident Lab : campagne de diagnostic, de correction et de remise en service d'une plateforme cloud.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
-<body data-page="lab">
+<body class="lab-page" data-page="lab">
 <a class="skip-link" href="#main-content">Aller au contenu</a>
 <header class="site-header">
 <a class="brand" href="index.html" aria-label="NEXORA, accueil"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a>
@@ -30,9 +30,14 @@
 <a href="index.html">Accueil</a><a href="expertise.html">Expertise</a><a href="solutions.html">Solutions</a><a href="architecture.html">Architecture</a><a href="technologies.html">Technologies</a><a href="company.html">Entreprise</a><a href="lab.html">Cloud Lab</a><a href="account.html">Espace membre</a><a class="nav-contact" href="contact.html">Contact <span>↗</span></a>
 </nav></header>
 <main id="main-content">
-<section class="page-hero lab-page-hero"><div class="breadcrumbs"><a href="index.html">Accueil</a> / Cloud Lab</div>
-<div class="page-hero-grid"><div><p class="eyebrow"><span class="eyebrow-line"></span> NEXORA / INCIDENT RESPONSE TRAINING</p><h1>La production est en panne. <em>À vous de jouer.</em></h1><p class="hero-lead">Vous prenez l'astreinte d'une plateforme cloud. Diagnostiquez les incidents, corrigez les fichiers de configuration, faites passer les tests et redéployez sans casser le reste.</p></div>
-<aside class="page-hero-aside"><strong>Une campagne, un seul système.</strong>6 incidents liés au même service, de Kubernetes à la chaîne CI/CD. Les erreurs persistent jusqu'à ce que vous trouviez et appliquiez une correction validée.</aside></div></section>
+<section class="lab-hero">
+  <div class="lab-hero-top"><a href="index.html">Accueil</a><span>/</span><span>Cloud Lab</span><b>INCIDENT RESPONSE / TRAINING ENVIRONMENT</b></div>
+  <div class="lab-hero-grid">
+    <div><p class="lab-hero-eyebrow"><span></span> NEXORA / OPERATIONS TRAINING</p><h1>La production est en panne.<br><em>Reprenez le contrôle.</em></h1><p>Une campagne de six incidents liés au même service. Diagnostiquez les symptômes, corrigez les fichiers de configuration, validez chaque changement et restaurez progressivement la plateforme.</p><a href="#cloud-campaign" class="lab-hero-action">Entrer dans le laboratoire <span>↓</span></a></div>
+    <aside class="lab-mission-card"><div class="lab-mission-card-head"><span>ACTIVE SCENARIO</span><b>NX-OPS-017</b></div><div class="lab-mission-state"><i></i><span>PRODUCTION / DEGRADED</span></div><strong>Restore<br>the platform.</strong><div class="lab-mission-data"><span>INCIDENTS<b>06</b></span><span>VALIDATIONS<b>24</b></span><span>STACK<b>K8S / IaC / CI</b></span></div><small>SIMULATION PÉDAGOGIQUE LOCALE</small></aside>
+  </div>
+  <div class="lab-hero-foot"><span>OBSERVE <i>→</i> DIAGNOSE <i>→</i> FIX <i>→</i> VERIFY</span><span>LOCAL TRAINING SESSION / 01</span></div>
+</section>
 <section class="content-section lab-content">
 <div class="lab-briefing"><div><div class="section-kicker">MISSION PRINCIPALE / NX-OPS-017</div><h2>Restaurer la plateforme NEXORA.</h2><p class="content-lead">L'application publique renvoie des erreurs. Le déploiement est instable, le routage ne répond plus correctement et plusieurs contrôles de production sont défaillants. Vous devez traiter les incidents dans l'ordre, comprendre les symptômes et corriger le code d'infrastructure.</p></div>
 <div class="briefing-side"><span class="briefing-label">ENVIRONNEMENT</span><b>Production · Europe West</b><span class="briefing-label">STACK</span><b>Kubernetes · NGINX · Terraform · GitHub Actions</b><span class="briefing-label">MODE</span><b>Simulation pédagogique locale</b></div></div>
@@ -51,7 +56,7 @@
 </aside>
 <div class="workbench">
 <div class="incident-heading">
-<div><div class="incident-meta"><span id="incident-severity" class="severity severity-critical">SEV-1 · CRITIQUE</span><span id="incident-id">INC-001</span><span id="incident-stage">ÉTAPE 1 / 5</span></div><h2 id="incident-title">Déploiement API bloqué</h2><p id="incident-summary">Les pods ne deviennent pas Ready. Le service ne peut pas recevoir de trafic.</p></div>
+<div><div class="incident-meta"><span id="incident-severity" class="severity severity-critical">SEV-1 · CRITIQUE</span><span id="incident-id">INC-001</span><span id="incident-stage">ÉTAPE 1 / 6</span></div><h2 id="incident-title">Déploiement API bloqué</h2><p id="incident-summary">Les pods ne deviennent pas Ready. Le service ne peut pas recevoir de trafic.</p></div>
 <div class="incident-state" id="incident-state">OUVERT</div>
 </div>
 <div class="incident-details" id="incident-details"><div><small>SYMPTÔME</small><b>Pods non disponibles</b></div><div><small>IMPACT</small><b>API indisponible</b></div><div><small>FICHIER À CORRIGER</small><b>deployment.yaml</b></div></div>
@@ -88,7 +93,15 @@
 <div class="campaign-complete" id="campaign-complete" hidden><div class="complete-icon">✓</div><span class="section-kicker">MISSION ACCOMPLIE</span><h2>La plateforme est de nouveau opérationnelle.</h2><p id="final-summary">Vous avez restauré tous les composants et validé la suite de tests.</p><div class="complete-stats" id="complete-stats"></div><button class="button button-primary" id="play-again" type="button">Rejouer la campagne ↻</button></div>
 </div>
 </section>
-<section class="dark-section"><div class="content-section"><div class="section-kicker">CE QUE VOUS APPRENEZ</div><div class="two-col"><div><h2>Diagnostiquer avant de modifier. Tester avant de déployer.</h2></div><div><p>Ce laboratoire reprend des gestes d'exploitation courants : lire des logs, comprendre un état Kubernetes, corriger une configuration NGINX, sécuriser un stockage, réparer un pipeline CI/CD et dimensionner une plateforme.</p><p>Les extraits sont simplifiés et contrôlés par une suite de tests pédagogique. Le terminal ne donne accès à aucun système réel et aucun code utilisateur n'est exécuté sur un serveur.</p></div></div></div></section>
+<section class="lab-learning">
+  <div class="lab-learning-head"><span>AFTER ACTION / LEARNING OUTCOMES</span><h2>Diagnostiquer avant de modifier.<br><em>Tester avant de déployer.</em></h2></div>
+  <div class="lab-learning-grid">
+    <article><b>01</b><h3>Lire les signaux</h3><p>Utiliser les symptômes, les journaux et les commandes de diagnostic pour isoler la cause.</p></article>
+    <article><b>02</b><h3>Corriger à la source</h3><p>Modifier les configurations Kubernetes, NGINX, Terraform, CI/CD et JavaScript.</p></article>
+    <article><b>03</b><h3>Valider le changement</h3><p>Exécuter les contrôles et déployer uniquement lorsque tous les tests de l’incident passent.</p></article>
+  </div>
+  <p class="lab-learning-note">Le terminal et les déploiements sont simulés dans le navigateur. Aucun shell système n’est ouvert et aucun code saisi n’est exécuté sur un serveur réel. La progression est conservée localement sur cet appareil.</p>
+</section>
 </main>
 <footer class="site-footer"><div class="footer-main"><div><a class="brand brand-footer" href="index.html"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a><p>Cloud Engineering & Platform Architecture.<br>Des infrastructures pensées pour durer.</p></div><div class="footer-column"><b>Explorer</b><a href="expertise.html">Expertise</a><a href="solutions.html">Solutions</a><a href="architecture.html">Architecture</a></div><div class="footer-column"><b>Ressources</b><a href="technologies.html">Technologies</a><a href="company.html">Entreprise</a><a href="lab.html">Cloud Lab</a><a href="contact.html">Contact</a></div><div class="footer-note"><span>ENGINEERED FOR WHAT'S NEXT.</span><small>Site de démonstration — marque fictive.</small></div></div><div class="footer-bottom"><span>© 2026 NEXORA. Tous droits réservés.</span><a href="contact.html">Nous contacter ↗</a></div></footer>
 <script src="script.js"></script></body></html>

@@ -53,7 +53,7 @@ for (const [page, html] of Object.entries(htmlByPage)) {
   assert.equal(new Set(ids).size, ids.length, 'Duplicate id in ' + page);
   assert.match(html, /<html lang=["']fr["']>/, page + ' must declare French as its language');
   assert.match(html, /<title>[^<]+<\/title>/, page + ' must have a page title');
-  assert.match(html, /<meta name=["']description["'] content=["'][^"]{30,}["']>/, page + ' needs a useful meta description');
+  assert.match(html, /<meta name=["']description["'] content="[^"]{30,}">/, page + ' needs a useful meta description');
   assert.match(html, /class=["']skip-link["'] href=["']#main-content["']/, page + ' needs a skip link');
   assert.match(html, /<main id=["']main-content["']>/, page + ' needs a main landmark');
   assert.equal((html.match(/<h1(?:\s|>)/g) || []).length, 1, page + ' must have exactly one H1');
@@ -117,9 +117,16 @@ assert.match(account, /id=["']register-form["']/, 'The member area must expose t
 assert.match(account, /src=["']account\.js["']/, 'The member area must load its client controller');
 
 const contact = htmlByPage['contact.html'];
-assert.match(contact, /Votre demande sera enregistrée côté serveur/, 'The contact page must explain server-side submission');
-
+assert.match(contact, /l’API backend n’est pas encore déployée sur le site public GitHub Pages/, 'The contact page must disclose that the public API is not deployed yet');
+assert.match(contact, /id=["']contact-form["']/, 'The contact page must expose the functional contact form');
+assert.match(htmlByPage['account.html'], /id=["']account-service-notice["']/, 'The member page must disclose current API deployment status');
+assert.match(htmlByPage['technologies.html'], /REFERENCE STACK/, 'The technologies page must expose its ecosystem map');
+assert.match(htmlByPage['company.html'], /identité de marque fictive/, 'The company page must disclose the fictional brand');
 const lab = htmlByPage['lab.html'];
+assert.match(lab, /ACTIVE SCENARIO/, 'The Cloud Lab must expose its incident scenario overview');
+assert.ok(script.includes("fixedCount()+'/'+missions.length"), 'The Cloud Lab terminal must display the current mission count');
+assert.ok(script.includes('fixedCount()===missions.length'), 'The Cloud Lab operational status must use the full mission count');
+
 for (const id of ['cloud-campaign','mission-list','code-editor','terminal-form','run-tests','deploy-fix','test-list','event-timeline','campaign-complete']) {
   assert.ok(lab.includes('id="' + id + '"'), 'Cloud Lab is missing #' + id);
 }

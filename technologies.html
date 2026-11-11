@@ -1,30 +1,138 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Un écosystème technique sélectionné selon les besoins et les contraintes du projet."><title>Technologies — NEXORA</title><link rel="stylesheet" href="styles.css"><meta name="theme-color" content="#101d2d">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'">
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Une cartographie des briques techniques utiles à une plateforme cloud cohérente, de l’infrastructure à l’observabilité.">
+  
+  <title>Technologies — NEXORA</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="theme-color" content="#101d2d">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; form-action 'self'">
   <link rel="canonical" href="https://noname9723.github.io/Cloud-Engineering/technologies.html">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="NEXORA">
-  <meta property="og:locale" content="fr_FR">
-  <meta property="og:title" content="Technologies — NEXORA">
-  <meta property="og:description" content="Un écosystème technique sélectionné selon les besoins et les contraintes du projet.">
+  <meta property="og:type" content="website"><meta property="og:site_name" content="NEXORA"><meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Technologies — NEXORA"><meta property="og:description" content="Une cartographie des briques techniques utiles à une plateforme cloud cohérente, de l’infrastructure à l’observabilité.">
   <meta property="og:url" content="https://noname9723.github.io/Cloud-Engineering/technologies.html">
   <meta property="og:image" content="https://noname9723.github.io/Cloud-Engineering/assets/og-cloud.svg">
   <meta property="og:image:alt" content="NEXORA — Cloud Engineering, Platform Architecture et Reliability">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Technologies — NEXORA">
-  <meta name="twitter:description" content="Un écosystème technique sélectionné selon les besoins et les contraintes du projet.">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Technologies — NEXORA"><meta name="twitter:description" content="Une cartographie des briques techniques utiles à une plateforme cloud cohérente, de l’infrastructure à l’observabilité.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-</head><body data-page="technologies">
-<a class="skip-link" href="#main-content">Aller au contenu</a><header class="site-header"><a class="brand" href="index.html" aria-label="NEXORA, accueil"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a><button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button><nav class="site-nav" id="site-nav" aria-label="Navigation principale"><a href="index.html">Accueil</a><a href="expertise.html">Expertise</a><a href="solutions.html">Solutions</a><a href="architecture.html">Architecture</a><a href="technologies.html">Technologies</a><a href="company.html">Entreprise</a><a href="lab.html">Cloud Lab</a><a href="account.html">Espace membre</a><a class="nav-contact" href="contact.html">Contact <span>↗</span></a></nav></header><main id="main-content"><section class="page-hero"><div class="breadcrumbs"><a href="index.html">Accueil</a> / Technologies</div><div class="page-hero-grid"><div><p class="eyebrow"><span class="eyebrow-line"></span> NEXORA / TECHNOLOGIES</p><h1>Un écosystème technique sélectionné selon les besoins et les contraintes du projet<em>.</em></h1><p class="hero-lead">Un écosystème technique sélectionné selon les besoins et les contraintes du projet.</p></div><aside class="page-hero-aside"><strong>D</strong>e</aside></div></section><section class="content-section"><div class="section-kicker">01 — ENVIRONNEMENT TECHNIQUE</div><h2>Un écosystème cohérent, plutôt qu'une collection d'outils.</h2><p class="content-lead">Les technologies ci-dessous représentent des exemples de briques courantes de l'ingénierie cloud. Le choix final dépend de l'environnement, du niveau de maîtrise et des contraintes du projet.</p><div class="technology-grid">
-<article class="technology-card"><span class="tech-label">CLOUD PROVIDERS</span><h3>Plateformes cloud</h3><p>AWS, Microsoft Azure et Google Cloud Platform : calcul, réseau, stockage, identité et services managés.</p></article>
-<article class="technology-card"><span class="tech-label">SYSTEMS</span><h3>Systèmes & réseau</h3><p>Linux, TCP/IP, DNS, TLS, routage, segmentation et administration des environnements.</p></article>
-<article class="technology-card"><span class="tech-label">CONTAINERS</span><h3>Conteneurisation</h3><p>Docker et OCI pour construire des images reproductibles et isoler les applications.</p></article>
-<article class="technology-card"><span class="tech-label">ORCHESTRATION</span><h3>Kubernetes</h3><p>Déploiement, orchestration, découverte de services, scaling et gestion du cycle de vie.</p></article>
-<article class="technology-card"><span class="tech-label">INFRASTRUCTURE AS CODE</span><h3>Terraform & Ansible</h3><p>Décrire l'infrastructure et automatiser la configuration de manière versionnée.</p></article>
-<article class="technology-card"><span class="tech-label">DELIVERY</span><h3>CI/CD & GitOps</h3><p>GitHub Actions, GitLab CI et pratiques GitOps pour automatiser les contrôles et déploiements.</p></article>
-<article class="technology-card"><span class="tech-label">OBSERVABILITY</span><h3>Prometheus & Grafana</h3><p>Collecte de métriques, tableaux de bord, alertes et compréhension de la santé des services.</p></article>
-<article class="technology-card"><span class="tech-label">LOGGING & TRACING</span><h3>OpenTelemetry & logs</h3><p>Traces distribuées, journaux centralisés et corrélation des événements applicatifs.</p></article>
-<article class="technology-card"><span class="tech-label">SECURITY</span><h3>Identité & protection</h3><p>IAM, gestion des secrets, analyse des vulnérabilités, politiques et contrôle des accès.</p></article>
-</div></section>
-<section class="dark-section"><div class="content-section"><div class="two-col"><div><div class="section-kicker">02 — CRITÈRES DE SÉLECTION</div><h2>La technologie suit l'architecture, pas l'inverse.</h2></div><div><p>Avant de retenir un outil, il faut comprendre le problème à résoudre et son coût global d'exploitation.</p><ul class="check-list"><li>Compatibilité avec l'existant et les compétences de l'équipe</li><li>Modèle de support, pérennité et communauté</li><li>Interopérabilité et réversibilité</li><li>Complexité opérationnelle et coût total</li><li>Exigences de sécurité et conformité</li></ul></div></div></div></section>
-<section class="closing-cta"><div><p class="eyebrow">STACK TECHNIQUE</p><h2>Choisissons les outils qui servent réellement votre plateforme.</h2></div><a class="button button-primary" href="contact.html">Discuter de votre stack <span>↗</span></a></section></main><footer class="site-footer"><div class="footer-main"><div><a class="brand brand-footer" href="index.html"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a><p>Cloud Engineering & Platform Architecture.<br>Des infrastructures pensées pour durer.</p></div><div class="footer-column"><b>Explorer</b><a href="expertise.html">Expertise</a><a href="solutions.html">Solutions</a><a href="architecture.html">Architecture</a></div><div class="footer-column"><b>Ressources</b><a href="technologies.html">Technologies</a><a href="company.html">Entreprise</a><a href="lab.html">Cloud Lab</a><a href="contact.html">Contact</a></div><div class="footer-note"><span>ENGINEERED FOR WHAT'S NEXT.</span><small>Site de démonstration — marque fictive.</small></div></div><div class="footer-bottom"><span>© 2026 NEXORA. Tous droits réservés.</span><a href="contact.html">Nous contacter ↗</a></div></footer><script src="script.js"></script></body></html>
+</head>
+<body class="technology-page" data-page="technologies">
+<a class="skip-link" href="#main-content">Aller au contenu</a>
+<header class="site-header">
+  <a class="brand" href="index.html" aria-label="NEXORA, accueil"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a>
+  <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
+  <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+    <a href="index.html">Accueil</a>
+    <a href="expertise.html">Expertise</a>
+    <a href="solutions.html">Solutions</a>
+    <a href="architecture.html">Architecture</a>
+    <a href="technologies.html" aria-current="page">Technologies</a>
+    <a href="company.html">Entreprise</a>
+    <a href="lab.html">Cloud Lab</a>
+    <a href="account.html">Espace membre</a>
+    <a class="nav-contact" href="contact.html">Contact <span>↗</span></a>
+  </nav>
+</header>
+<main id="main-content">
+  <section class="tech-landscape-hero">
+    <div class="tech-hero-gridline" aria-hidden="true"></div>
+    <div class="tech-hero-inner">
+      <div class="tech-breadcrumb"><a href="index.html">Accueil</a><span>/</span><span>Technologies</span></div>
+      <div class="tech-hero-copy">
+        <p class="tech-eyebrow"><span></span> NEXORA / TECHNOLOGY LANDSCAPE</p>
+        <h1>Les bons outils.<br><em>Au bon endroit.</em></h1>
+        <p>Une plateforme cloud s’appuie sur plusieurs couches techniques. Nous les considérons comme un écosystème : chaque brique doit répondre à un besoin clair, s’intégrer au reste et rester exploitable.</p>
+        <a class="tech-hero-link" href="#technology-map">Explorer l’écosystème <span>↓</span></a>
+      </div>
+      <aside class="tech-stack-visual" aria-label="Organisation des couches technologiques">
+        <div class="tech-stack-top"><span>REFERENCE STACK</span><b>NX / TECH-01</b></div>
+        <div class="tech-stack-layer"><small>06 / OBSERVE</small><b>Metrics · Logs · Traces</b><i>↗</i></div>
+        <div class="tech-stack-layer"><small>05 / DELIVER</small><b>CI/CD · GitOps</b><i>↗</i></div>
+        <div class="tech-stack-layer"><small>04 / RUN</small><b>Containers · Kubernetes</b><i>↗</i></div>
+        <div class="tech-stack-layer"><small>03 / PROVISION</small><b>Terraform · Configuration</b><i>↗</i></div>
+        <div class="tech-stack-layer"><small>02 / CONNECT</small><b>Network · Identity · Security</b><i>↗</i></div>
+        <div class="tech-stack-layer"><small>01 / FOUNDATION</small><b>Cloud · Compute · Storage</b><i>↗</i></div>
+        <div class="tech-stack-foot"><span>STACK DESIGN PRINCIPLE</span><b>Fit the tool to the constraint.</b></div>
+      </aside>
+    </div>
+    <div class="tech-hero-index">TECHNOLOGY LANDSCAPE <span>06 LAYERS</span></div>
+  </section>
+
+  <section class="tech-map-section" id="technology-map">
+    <div class="tech-map-heading">
+      <div><p class="tech-kicker">01 / ECOSYSTEM MAP</p><h2>Une chaîne technique, pas un inventaire de logos.</h2></div>
+      <p>Les outils cités sont des exemples de l’écosystème cloud. Ils ne constituent pas une stack imposée : la sélection dépend du contexte, des équipes et du niveau de service attendu.</p>
+    </div>
+    <div class="tech-domain-grid">
+      <article class="tech-domain tech-domain-featured">
+        <div class="tech-domain-head"><span>01</span><small>FOUNDATION</small><b>Infrastructure cloud</b></div>
+        <p>Les ressources de calcul, de stockage et les services managés qui accueillent les applications.</p>
+        <div class="tech-pills"><span>AWS</span><span>Microsoft Azure</span><span>Google Cloud</span><span>Linux</span></div>
+        <div class="tech-domain-foot"><span>CAPACITÉ</span><b>Compute · Storage · Identity</b></div>
+      </article>
+      <article class="tech-domain">
+        <div class="tech-domain-head"><span>02</span><small>CONNECT</small><b>Réseau &amp; sécurité</b></div>
+        <p>Les flux, les frontières de confiance et les politiques qui contrôlent l’accès.</p>
+        <div class="tech-pills"><span>TCP/IP</span><span>DNS</span><span>TLS</span><span>IAM</span><span>WAF</span></div>
+        <div class="tech-domain-foot"><span>CAPACITÉ</span><b>Connectivity · Access · Policy</b></div>
+      </article>
+      <article class="tech-domain">
+        <div class="tech-domain-head"><span>03</span><small>PROVISION</small><b>Infrastructure as Code</b></div>
+        <p>Décrire, revoir et reproduire les environnements à partir de configurations versionnées.</p>
+        <div class="tech-pills"><span>Terraform</span><span>OpenTofu</span><span>Ansible</span></div>
+        <div class="tech-domain-foot"><span>CAPACITÉ</span><b>Provision · Configure · Repeat</b></div>
+      </article>
+      <article class="tech-domain tech-domain-dark">
+        <div class="tech-domain-head"><span>04</span><small>RUNTIME</small><b>Conteneurs &amp; orchestration</b></div>
+        <p>Fournir des environnements d’exécution standardisés et gérer le cycle de vie des services.</p>
+        <div class="tech-pills"><span>Docker</span><span>OCI</span><span>Kubernetes</span><span>Helm</span></div>
+        <div class="tech-domain-foot"><span>CAPACITÉ</span><b>Package · Schedule · Scale</b></div>
+      </article>
+      <article class="tech-domain">
+        <div class="tech-domain-head"><span>05</span><small>DELIVERY</small><b>CI/CD &amp; GitOps</b></div>
+        <p>Contrôler les changements, tester les livraisons et automatiser les déploiements.</p>
+        <div class="tech-pills"><span>GitHub Actions</span><span>GitLab CI</span><span>Argo CD</span></div>
+        <div class="tech-domain-foot"><span>CAPACITÉ</span><b>Validate · Release · Trace</b></div>
+      </article>
+      <article class="tech-domain">
+        <div class="tech-domain-head"><span>06</span><small>OBSERVE</small><b>Observabilité</b></div>
+        <p>Relier les signaux techniques au comportement réel des services.</p>
+        <div class="tech-pills"><span>Prometheus</span><span>Grafana</span><span>OpenTelemetry</span></div>
+        <div class="tech-domain-foot"><span>CAPACITÉ</span><b>Metrics · Logs · Traces</b></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="tech-selection">
+    <div class="tech-selection-label"><span>02 / DECISION FRAMEWORK</span><b>Avant de choisir</b></div>
+    <div class="tech-selection-content">
+      <h2>La technologie suit le problème.</h2>
+      <p>Un outil pertinent réduit une difficulté sans créer une charge opérationnelle disproportionnée. La décision doit rester explicable et réévaluable.</p>
+      <div class="tech-criteria">
+        <div><b>01</b><span>Compatibilité avec l’existant et les compétences.</span></div>
+        <div><b>02</b><span>Sécurité, support et maturité de l’écosystème.</span></div>
+        <div><b>03</b><span>Coût total, complexité et effort d’exploitation.</span></div>
+        <div><b>04</b><span>Interopérabilité, réversibilité et portabilité.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tech-cta">
+    <div><span>STACK / CONTEXT FIRST</span><h2>Une stack cohérente commence par les contraintes du projet.</h2></div>
+    <a href="expertise.html">Voir notre approche d’ingénierie <span>↗</span></a>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="footer-main">
+    <div><a class="brand brand-footer" href="index.html"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a><p>Cloud Engineering &amp; Platform Architecture.<br>Des systèmes pensés pour durer.</p></div>
+    <div class="footer-column"><b>Explorer</b><a href="expertise.html">Expertise</a><a href="solutions.html">Solutions</a><a href="architecture.html">Architecture</a></div>
+    <div class="footer-column"><b>Ressources</b><a href="technologies.html">Technologies</a><a href="company.html">Entreprise</a><a href="lab.html">Cloud Lab</a><a href="contact.html">Contact</a></div>
+    <div class="footer-note"><span>ENGINEERED FOR WHAT'S NEXT.</span><small>Site de démonstration — marque fictive.</small></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 NEXORA. Tous droits réservés.</span><a href="contact.html">Nous contacter ↗</a></div>
+</footer>
+<script src="script.js"></script>
+</body></html>

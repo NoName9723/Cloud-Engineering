@@ -609,7 +609,7 @@ spec:
     }
     if(key==='clear'){terminalOutput.innerHTML='';return 'Terminal nettoyé.';}
     if(key==='status'){
-      return 'NEXORA PLATFORM STATUS\nIncidents résolus : '+fixedCount()+'/5\nScore technique : '+totalScore()+' XP\nÉtat : '+(fixedCount()===5?'OPERATIONAL':fixedCount()===0?'CRITICAL':'RECOVERY IN PROGRESS')+'\nIncident actif : '+mission.ticket+' — '+mission.title;
+      return 'NEXORA PLATFORM STATUS\nIncidents résolus : '+fixedCount()+'/'+missions.length+'\nScore technique : '+totalScore()+' XP\nÉtat : '+(fixedCount()===missions.length?'OPERATIONAL':fixedCount()===0?'CRITICAL':'RECOVERY IN PROGRESS')+'\nIncident actif : '+mission.ticket+' — '+mission.title;
     }
     if(key==='kubectl get pods'||key==='kubectl get pods -A'){
       if(mission.id==='deployment')return currentDiagnostic('kubectl get pods');
