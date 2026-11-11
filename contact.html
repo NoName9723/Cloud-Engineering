@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Présentez votre contexte technique et les objectifs de votre projet. Le formulaire sera opérationnel lorsque l’API backend sera déployée.">
+  <meta name="description" content="Démo de formulaire de contact NEXORA.">
   
   <title>Contact — NEXORA</title>
   <link rel="stylesheet" href="styles.css">
@@ -12,11 +12,11 @@
   <link rel="canonical" href="https://noname9723.github.io/Cloud-Engineering/contact.html">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta property="og:type" content="website"><meta property="og:site_name" content="NEXORA"><meta property="og:locale" content="fr_FR">
-  <meta property="og:title" content="Contact — NEXORA"><meta property="og:description" content="Présentez votre contexte technique et les objectifs de votre projet. Le formulaire sera opérationnel lorsque l’API backend sera déployée.">
+  <meta property="og:title" content="Contact — NEXORA"><meta property="og:description" content="Démo de formulaire de contact NEXORA.">
   <meta property="og:url" content="https://noname9723.github.io/Cloud-Engineering/contact.html">
   <meta property="og:image" content="https://noname9723.github.io/Cloud-Engineering/assets/og-cloud.svg">
   <meta property="og:image:alt" content="NEXORA — Cloud Engineering, Platform Architecture et Reliability">
-  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Contact — NEXORA"><meta name="twitter:description" content="Présentez votre contexte technique et les objectifs de votre projet. Le formulaire sera opérationnel lorsque l’API backend sera déployée.">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Contact — NEXORA"><meta name="twitter:description" content="Démo de formulaire de contact NEXORA.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
   <script src="script.js" defer></script>
 </head>
@@ -69,8 +69,8 @@
         <label for="organization">Organisation <span class="contact-optional">FACULTATIF</span><input id="organization" name="organization" autocomplete="organization" placeholder="Nom de votre organisation"></label>
         <label for="subject">Sujet<select id="subject" name="subject" required><option value="">Sélectionnez un sujet</option><option>Architecture cloud</option><option>Platform Engineering</option><option>Automatisation &amp; CI/CD</option><option>Sécurité &amp; fiabilité</option><option>Autre demande</option></select></label>
         <label for="message">Votre message<textarea id="message" name="message" required minlength="20" placeholder="Décrivez le contexte, l’objectif et les contraintes…"></textarea><small class="contact-field-note">20 caractères minimum. Évitez toute information confidentielle.</small></label>
-        <div class="contact-submit-row"><button class="button button-primary" type="submit">Envoyer la demande <span>↗</span></button><span>Transmission chiffrée lorsque l’API est déployée en HTTPS.</span></div>
-        <p class="form-note">État actuel : l’interface est prête, mais l’API backend n’est pas encore déployée sur le site public GitHub Pages. L’envoi réel sera disponible après raccordement du serveur.</p>
+        <div class="contact-submit-row"><button class="button button-primary" type="submit">Préparer un e-mail <span>↗</span></button><span>Ouvre la messagerie du visiteur avec un brouillon prérempli.</span></div>
+        <p class="form-note">Démo : contact@nexora.example est une adresse fictive ; aucun message ne sera reçu.</p>
         <div class="form-result" id="form-result" role="status" aria-live="polite"></div>
       </form>
     </div>
@@ -79,7 +79,7 @@
   <section class="contact-faq-section">
     <div class="contact-faq-heading"><span>03 / FAQ</span><h2>Avant de transmettre votre demande.</h2></div>
     <div class="contact-faq-list">
-      <div class="faq-item"><button class="faq-question" type="button" data-faq aria-expanded="false" aria-controls="faq1">Le formulaire est-il déjà connecté au serveur ? <span>＋</span></button><div class="faq-answer" id="faq1" hidden>L’interface et la route API sont préparées. Le serveur Node.js n’est pas encore déployé derrière le domaine public GitHub Pages ; l’enregistrement réel sera disponible après son hébergement et le raccordement du frontend.</div></div>
+      <div class="faq-item"><button class="faq-question" type="button" data-faq aria-expanded="false" aria-controls="faq1">Le formulaire est-il déjà connecté au serveur ? <span>＋</span></button><div class="faq-answer" id="faq1" hidden>Le formulaire prépare un brouillon dans votre messagerie. L’adresse de démonstration est fictive et ne reçoit pas les messages.</div></div>
       <div class="faq-item"><button class="faq-question" type="button" data-faq aria-expanded="false" aria-controls="faq2">Faut-il déjà utiliser un fournisseur cloud ? <span>＋</span></button><div class="faq-answer" id="faq2" hidden>Non. Le cadrage peut commencer par l’analyse des besoins et la comparaison des options : cloud public, environnement hybride ou maintien de certains services sur site.</div></div>
       <div class="faq-item"><button class="faq-question" type="button" data-faq aria-expanded="false" aria-controls="faq3">Les technologies présentées sont-elles obligatoires ? <span>＋</span></button><div class="faq-answer" id="faq3" hidden>Non. Ce sont des exemples représentatifs. La sélection dépend des exigences techniques, des équipes, des coûts et des contraintes de l’organisation.</div></div>
     </div>
