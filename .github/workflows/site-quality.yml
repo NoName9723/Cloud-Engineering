@@ -49,6 +49,6 @@ jobs:
       - name: Test backend validation and password handling
         run: npm run test:unit
       - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install chromium
       - name: Test browser navigation, authentication and contact flow
         run: npm run test:e2e
