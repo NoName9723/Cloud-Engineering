@@ -122,11 +122,11 @@ assert.match(contact, /id=["']contact-form["']/, 'The contact page must expose t
 assert.match(htmlByPage['account.html'], /id=["']account-service-notice["']/, 'The member page must disclose current API deployment status');
 assert.match(htmlByPage['technologies.html'], /REFERENCE STACK/, 'The technologies page must expose its ecosystem map');
 assert.match(htmlByPage['company.html'], /identité de marque fictive/, 'The company page must disclose the fictional brand');
+const lab = htmlByPage['lab.html'];
 assert.match(lab, /ACTIVE SCENARIO/, 'The Cloud Lab must expose its incident scenario overview');
 assert.ok(script.includes("fixedCount()+'/'+missions.length"), 'The Cloud Lab terminal must display the current mission count');
 assert.ok(script.includes('fixedCount()===missions.length'), 'The Cloud Lab operational status must use the full mission count');
 
-const lab = htmlByPage['lab.html'];
 for (const id of ['cloud-campaign','mission-list','code-editor','terminal-form','run-tests','deploy-fix','test-list','event-timeline','campaign-complete']) {
   assert.ok(lab.includes('id="' + id + '"'), 'Cloud Lab is missing #' + id);
 }
