@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Accédez à votre espace membre NEXORA.">
+  <meta name="description" content="Accédez à l’interface de compte NEXORA. L’authentification sera disponible après le déploiement du backend.">
   <meta name="robots" content="noindex,nofollow">
   <title>Espace membre — NEXORA</title>
   <link rel="stylesheet" href="styles.css">
@@ -11,56 +11,62 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; form-action 'self'">
   <link rel="canonical" href="https://noname9723.github.io/Cloud-Engineering/account.html">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="NEXORA">
-  <meta property="og:locale" content="fr_FR">
-  <meta property="og:title" content="Espace membre — NEXORA">
-  <meta property="og:description" content="Accédez à votre espace membre NEXORA.">
+  <meta property="og:type" content="website"><meta property="og:site_name" content="NEXORA"><meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Espace membre — NEXORA"><meta property="og:description" content="Accédez à l’interface de compte NEXORA. L’authentification sera disponible après le déploiement du backend.">
   <meta property="og:url" content="https://noname9723.github.io/Cloud-Engineering/account.html">
   <meta property="og:image" content="https://noname9723.github.io/Cloud-Engineering/assets/og-cloud.svg">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Espace membre — NEXORA">
-  <meta name="twitter:description" content="Accédez à votre espace membre NEXORA.">
+  <meta property="og:image:alt" content="NEXORA — Cloud Engineering, Platform Architecture et Reliability">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Espace membre — NEXORA"><meta name="twitter:description" content="Accédez à l’interface de compte NEXORA. L’authentification sera disponible après le déploiement du backend.">
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
-<body data-page="account">
+<body class="account-page" data-page="account">
 <a class="skip-link" href="#main-content">Aller au contenu</a>
 <header class="site-header">
   <a class="brand" href="index.html" aria-label="NEXORA, accueil"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a>
   <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="site-nav"><span></span><span></span><span></span></button>
   <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
-    <a href="index.html">Accueil</a><a href="expertise.html">Expertise</a><a href="solutions.html">Solutions</a><a href="architecture.html">Architecture</a><a href="technologies.html">Technologies</a><a href="company.html">Entreprise</a><a href="lab.html">Cloud Lab</a><a href="account.html" aria-current="page">Espace membre</a><a class="nav-contact" href="contact.html">Contact <span>↗</span></a>
+    <a href="index.html">Accueil</a>
+    <a href="expertise.html">Expertise</a>
+    <a href="solutions.html">Solutions</a>
+    <a href="architecture.html">Architecture</a>
+    <a href="technologies.html">Technologies</a>
+    <a href="company.html">Entreprise</a>
+    <a href="lab.html">Cloud Lab</a>
+    <a href="account.html" aria-current="page">Espace membre</a>
+    <a class="nav-contact" href="contact.html">Contact <span>↗</span></a>
   </nav>
 </header>
 <main id="main-content">
-  <section class="page-hero">
-    <div class="breadcrumbs"><a href="index.html">Accueil</a> / Espace membre</div>
-    <div class="page-hero-grid">
-      <div><p class="eyebrow"><span class="eyebrow-line"></span> NEXORA / COMPTE</p><h1>Espace membre<em>.</em></h1><p class="hero-lead">Connectez-vous pour accéder à votre espace personnel.</p></div>
-      <aside class="page-hero-aside"><strong>N</strong>EXORA</aside>
-    </div>
-  </section>
-  <section class="content-section">
-    <div class="account-layout">
-      <div class="account-copy">
-        <div class="section-kicker">01 — ACCÈS PERSONNEL</div>
-        <h2>Un espace centralisé.</h2>
-        <p>Créez un compte ou connectez-vous pour retrouver votre session.</p>
-        <p class="account-security-note">Votre session est conservée côté serveur. Le navigateur ne reçoit pas votre mot de passe ni les données internes de session.</p>
+  <section class="account-workspace">
+    <aside class="account-side">
+      <div class="account-breadcrumb"><a href="index.html">Accueil</a><span>/</span><span>Espace membre</span></div>
+      <p class="account-eyebrow"><span></span> NEXORA / SECURE ACCESS</p>
+      <h1>Votre espace.<br><em>Vos accès.</em></h1>
+      <p class="account-side-lead">Une interface dédiée à la gestion de session, conçue autour d’une authentification côté serveur.</p>
+      <div class="account-security-points">
+        <div><span>01</span><b>Sessions serveur</b><small>Les sessions ne sont pas stockées dans le navigateur comme des données de profil.</small></div>
+        <div><span>02</span><b>Protection CSRF</b><small>Les actions sensibles s’appuient sur un jeton CSRF.</small></div>
+        <div><span>03</span><b>Mots de passe hachés</b><small>Les mots de passe ne sont pas conservés en clair côté serveur.</small></div>
       </div>
+      <div class="account-side-foot"><span>AUTHENTICATION MODEL</span><b>SERVER-SIDE / SESSION BASED</b></div>
+    </aside>
+
+    <section class="account-main">
+      <div class="account-main-heading"><span>MEMBER ACCESS / NX-ACCOUNT</span><b>01 — AUTHENTICATION</b></div>
+      <div class="account-service-notice" role="note"><b>API EN ATTENTE DE DÉPLOIEMENT</b><p>Le backend d’authentification est préparé dans le projet, mais n’est pas encore raccordé au site public GitHub Pages. La connexion et la création de compte seront actives après le déploiement du serveur.</p></div>
       <div class="account-card">
         <div class="account-switch" role="group" aria-label="Type d'accès">
           <button type="button" class="account-switch-button is-active" data-auth-mode="login" aria-pressed="true">Connexion</button>
           <button type="button" class="account-switch-button" data-auth-mode="register" aria-pressed="false">Créer un compte</button>
         </div>
         <form class="account-form" id="login-form">
-          <h2>Connexion</h2>
+          <div class="account-form-title"><span>WELCOME BACK</span><h2>Se connecter</h2><p>Utilisez les identifiants associés à votre compte.</p></div>
           <label for="login-email">Adresse e-mail<input id="login-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="nom@exemple.fr"></label>
           <label for="login-password">Mot de passe<input id="login-password" name="password" type="password" autocomplete="current-password" required maxlength="128"></label>
           <button class="button button-primary" type="submit">Se connecter <span>↗</span></button>
         </form>
         <form class="account-form" id="register-form" hidden>
-          <h2>Créer un compte</h2>
+          <div class="account-form-title"><span>CREATE YOUR ACCESS</span><h2>Créer un compte</h2><p>Renseignez les informations nécessaires à votre profil.</p></div>
           <label for="register-name">Nom affiché<input id="register-name" name="name" autocomplete="name" required minlength="2" maxlength="80" placeholder="Votre nom"></label>
           <label for="register-email">Adresse e-mail<input id="register-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="nom@exemple.fr"></label>
           <label for="register-password">Mot de passe<input id="register-password" name="password" type="password" autocomplete="new-password" required minlength="12" maxlength="128" aria-describedby="password-help"></label>
@@ -69,19 +75,20 @@
           <button class="button button-primary" type="submit">Créer mon compte <span>↗</span></button>
         </form>
         <section class="account-session" id="account-session" hidden>
-          <h2>Vous êtes connecté.</h2>
+          <span class="account-session-label">SESSION ACTIVE</span><h2>Vous êtes connecté.</h2>
           <p>Compte : <strong id="account-name"></strong></p>
           <p>E-mail : <strong id="account-email"></strong></p>
           <button class="button button-primary" id="logout-button" type="button">Se déconnecter</button>
         </section>
-        <p class="account-status" id="account-status" role="status" aria-live="polite">Connexion au service…</p>
+        <p class="account-status" id="account-status" role="status" aria-live="polite">Vérification du service…</p>
       </div>
-    </div>
+      <div class="account-main-foot"><span>SECURE BY DESIGN</span><span>HTTPS · CSRF · SESSION</span></div>
+    </section>
   </section>
 </main>
 <footer class="site-footer">
   <div class="footer-main">
-    <div><a class="brand brand-footer" href="index.html"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a><p>Cloud Engineering & Platform Architecture.<br>Des infrastructures pensées pour durer.</p></div>
+    <div><a class="brand brand-footer" href="index.html"><span class="brand-symbol">N</span><span>NEXORA<span class="brand-dot">.</span></span></a><p>Cloud Engineering &amp; Platform Architecture.<br>Des systèmes pensés pour durer.</p></div>
     <div class="footer-column"><b>Explorer</b><a href="expertise.html">Expertise</a><a href="solutions.html">Solutions</a><a href="architecture.html">Architecture</a></div>
     <div class="footer-column"><b>Ressources</b><a href="technologies.html">Technologies</a><a href="company.html">Entreprise</a><a href="lab.html">Cloud Lab</a><a href="contact.html">Contact</a></div>
     <div class="footer-note"><span>ENGINEERED FOR WHAT'S NEXT.</span><small>Site de démonstration — marque fictive.</small></div>
@@ -90,5 +97,4 @@
 </footer>
 <script src="script.js"></script>
 <script src="account.js"></script>
-</body>
-</html>
+</body></html>
