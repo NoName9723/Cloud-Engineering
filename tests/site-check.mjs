@@ -23,6 +23,7 @@ const supportFiles = [
   'package.json',
   'playwright.config.js',
   'account.js',
+  'cloud-lab.js',
   'server/app.js',
   'server/index.js',
   'server/db.js',
@@ -103,10 +104,11 @@ assert.match(css, /:focus-visible/, 'Keyboard focus indicators must be present')
 assert.match(css, /prefers-reduced-motion:reduce/, 'Reduced-motion preferences must be respected');
 
 const script = read('script.js');
+const cloudLabScript = read('cloud-lab.js');
 assert.match(script, /event\.key==='Escape'/, 'The mobile menu must close on Escape');
 assert.match(script, /event\.key==='ArrowRight'/, 'Tabbed interfaces must support arrow-key navigation');
-assert.match(script, /localStorage/, 'Cloud Lab progress must be saved locally');
-assert.doesNotMatch(script, /\beval\s*\(/, 'User-entered code must never be evaluated as JavaScript');
+assert.match(cloudLabScript, /localStorage/, 'Cloud Lab progress must be saved locally');
+assert.doesNotMatch(script + '\n' + cloudLabScript, /\beval\s*\(/, 'User-entered code must never be evaluated as JavaScript');
 assert.match(script, /fetch\('\/api\/contact'/, 'The contact form must submit through the backend API');
 assert.doesNotMatch(Object.values(htmlByPage).join('\n') + css, /images\.unsplash\.com/, 'Removed stock-photo dependencies must not return');
 
@@ -124,8 +126,15 @@ assert.match(htmlByPage['technologies.html'], /REFERENCE STACK/, 'The technologi
 assert.match(htmlByPage['company.html'], /identité de marque fictive/, 'The company page must disclose the fictional brand');
 const lab = htmlByPage['lab.html'];
 assert.match(lab, /ACTIVE SCENARIO/, 'The Cloud Lab must expose its incident scenario overview');
-assert.ok(script.includes("fixedCount()+'/'+missions.length"), 'The Cloud Lab terminal must display the current mission count');
-assert.ok(script.includes('fixedCount()===missions.length'), 'The Cloud Lab operational status must use the full mission count');
+assert.match(lab, /src=["']cloud-lab\.js["'] defer/, 'The Cloud Lab must load its dedicated deferred bundle');
+for (const [page, html] of Object.entries(htmlByPage)) {
+  if (page !== 'lab.html') assert.doesNotMatch(html, /src=["']cloud-lab\.js/, page + ' must not load the Cloud Lab bundle');
+}
+assert.ok(Buffer.byteLength(script) <= 10 * 1024, 'Shared JavaScript bundle exceeds 10 KiB');
+assert.ok(Buffer.byteLength(cloudLabScript) <= 45 * 1024, 'Cloud Lab JavaScript bundle exceeds 45 KiB');
+assert.ok(Buffer.byteLength(css) <= 135 * 1024, 'Stylesheet exceeds 135 KiB');
+assert.ok(cloudLabScript.includes("fixedCount()+'/'+missions.length"), 'The Cloud Lab terminal must display the current mission count');
+assert.ok(cloudLabScript.includes('fixedCount()===missions.length'), 'The Cloud Lab operational status must use the full mission count');
 
 for (const id of ['cloud-campaign','mission-list','code-editor','terminal-form','run-tests','deploy-fix','test-list','event-timeline','campaign-complete']) {
   assert.ok(lab.includes('id="' + id + '"'), 'Cloud Lab is missing #' + id);
@@ -136,12 +145,12 @@ assert.match(lab, /aria-controls=["']lab-panel-editor["']/, 'Cloud Lab tabs must
 const architecture = htmlByPage['architecture.html'];
 assert.match(architecture, /aria-controls=["']architecture-panel-containers["']/, 'Architecture tabs must identify their panels');
 for (const configPath of ['k8s/deployment.yaml','nginx/nginx.conf','infra/storage.tf','.github/workflows/deploy.yml','k8s/hpa.yaml','src/healthcheck.js']) {
-  assert.ok(script.includes(configPath), 'Cloud Lab scenario missing config file: ' + configPath);
+  assert.ok(cloudLabScript.includes(configPath), 'Cloud Lab scenario missing config file: ' + configPath);
 }
 for (const missionId of ['deployment','routing','storage','pipeline','scaling','api-health']) {
-  assert.ok(script.includes("id:'" + missionId + "'"), 'Cloud Lab mission missing: ' + missionId);
+  assert.ok(cloudLabScript.includes("id:'" + missionId + "'"), 'Cloud Lab mission missing: ' + missionId);
 }
-assert.equal((script.match(/\{name:'/g) || []).length, 24, 'The campaign must expose 24 automated code/configuration checks');
+assert.equal((cloudLabScript.match(/\{name:'/g) || []).length, 24, 'The campaign must expose 24 automated code/configuration checks');
 
 const robots = read('robots.txt');
 const sitemap = read('sitemap.xml');
