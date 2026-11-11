@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
-const source = fs.readFileSync('script.js', 'utf8');
+const source = fs.readFileSync('cloud-lab.js', 'utf8');
 const start = source.indexOf('const missions=[');
 const end = source.indexOf('const freshState', start);
 assert.ok(start >= 0 && end > start, 'Could not locate the Cloud Lab scenario catalogue');

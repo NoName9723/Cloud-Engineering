@@ -91,3 +91,17 @@ test('the Cloud Lab loads its interactive workspace', async ({ page }) => {
   await expect(page.locator('#cloud-campaign')).toBeVisible();
   await expect(page.locator('#mission-list')).toBeVisible();
 });
+
+test('loads the Cloud Lab bundle only on the Cloud Lab page', async ({ page }) => {
+  const loadedBundles = [];
+  page.on('request', request => {
+    if (request.url().endsWith('/cloud-lab.js')) loadedBundles.push(request.url());
+  });
+
+  await page.goto('/');
+  expect(loadedBundles).toHaveLength(0);
+
+  await page.goto('/lab.html');
+  await expect(page.locator('#cloud-campaign')).toBeVisible();
+  await expect.poll(() => loadedBundles.length).toBe(1);
+});
